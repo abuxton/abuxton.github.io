@@ -36,8 +36,8 @@ links:
     url: /about
   - title: Articles
     url: /articles
-  - title: Google
-    url: http://google.com
+  - title: Blog
+    url: http://blog.digitaladept.co.uk
     external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
