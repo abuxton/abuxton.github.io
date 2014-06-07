@@ -6,8 +6,8 @@ modified: 2013-05-31
 category: articles
 tags: [sample post]
 image:
-  feature: "https://pages.github.com/images/slideshow/jekyllrb.png"
-  credit: github.io
+  feature:  jekyllrb.png
+  credit:   github.io
   creditlink: http://jekyllrb.com/
 comments: false
 share: true
