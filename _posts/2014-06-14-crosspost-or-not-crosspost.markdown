@@ -13,7 +13,7 @@ comments: false
 share: true
 ---
 
-A second post just for posting sake, and to have a internal monologue that is not so internal about the value of posting here and also on [www.digitaladpet.co.uk][da]
+A second post just for posting sake, and to have a internal monologue that is not so internal about the value of posting here and also on [www.digitaladept.co.uk][da]
 
 Its not much of a discussion really! more a point to think out loud!
 
