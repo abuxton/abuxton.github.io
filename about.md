@@ -5,7 +5,7 @@ title: About abuxton.github.io, formally known as digitaladept.co.uk
 tags: [about,Jekyll, github.io,abuxton]
 modified: 2016-02-20
 image:
-  feature: so-simple-sample-image-4.jpg
+  feature: githubio.png
   credit: Adam Buxton
   creditlink: http://abuxton.github.io
 ---
