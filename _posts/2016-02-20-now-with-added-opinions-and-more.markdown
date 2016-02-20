@@ -2,7 +2,7 @@
 layout: post
 title: Now with added opinions and more!
 description: "A post with Github.io, using Jekyll blogging platform on Github.io, Actually starting to use the platform!"
-modified: 2014-06-14
+modified: 2016-02-20
 category: articles
 tags: [post,article,blog,blogger,digitaladept]
 image:
