@@ -1,6 +1,6 @@
 title:            abuxton.github.io
 description:      abuxton, Adam Buxtons or the Digital Adepts home on Github.
-logo:             site-logo.png
+logo:             profile_image.jpg #site-logo.png
 disqus_shortname: abuxton.github.io
 search:           true
 # Your site's domain goes here. When working locally use localhost server leave blank
