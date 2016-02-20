@@ -6,7 +6,7 @@ modified: 2014-06-14
 category: articles
 tags: [post,article,blog,blogger,digitaladept]
 image:
-  feature:  jekyllrb.png
+  feature:  github.io-puppet.png
   credit:   github.io
   creditlink: http://jekyllrb.com/
 comments: false
