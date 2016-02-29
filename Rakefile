@@ -13,6 +13,9 @@ CONFIG = {
   'theme_package_version' => "0.1.0"
 }
 
+task :default do
+  system "rake --tasks -A"
+  end
 # Path configuration helper
 module JB
   class Path
@@ -24,7 +27,8 @@ module JB
       :theme_packages => "_theme_packages",
       :posts => "_posts"
     }
-    
+  
+
     def self.base
       SOURCE
     end
