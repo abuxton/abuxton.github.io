@@ -30,7 +30,7 @@ So I’m not talking about a new idea! I’m talking about it because it’s a s
  
 Communication and tooling is how, from simply advertising the sphere of responsibility, to messaging where these complimentary products are in effect. 
 
-I started to write the rest of this post, I started to list out the communication methods, the tools, possible solutions. Then I started to realise the expanse of that task, and I stopped. I’ve planted the thought, I have some ideas on how to progress those lists of tools. So maybe a few posts will appear on this subject or a talk to let me give it that thousand feet overview i think it needs, for now Lets leave you thinking how to communicate this, and what tools would you use. 
+I started to write the rest of this post, I started to list out the communication methods, the tools, possible solutions. Then I started to realise the expanse of that task, and I stopped. I’ve planted the thought, I have some ideas on how to progress those lists of tools. So maybe a few posts will appear on this subject or a talk to let me give it that thousand feet overview I think it needs, for now let me leave you thinking how to communicate this, and what tools would you create or use. 
 
 
 
