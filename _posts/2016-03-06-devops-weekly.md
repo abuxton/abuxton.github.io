@@ -30,7 +30,7 @@ Devops Weekly is sponsored by Brightbox Cloud: the multi-zone cloud platform bui
 
 Try an SSD cloud server in 30 seconds with your £20 free credit…
 
-[ttp://brightbox.com/devopsweekly](http://brightbox.com/devopsweekly){:target="_blank"}
+[http://brightbox.com/devopsweekly](http://brightbox.com/devopsweekly){:target="_blank"}
 
 
 Sponsored
