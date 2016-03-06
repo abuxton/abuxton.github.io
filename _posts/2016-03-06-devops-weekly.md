@@ -133,6 +133,6 @@ Try an SSD cloud server in 30 seconds with your £20 free credit…
 http://brightbox.com/devopsweekly
 
 
-You can opted in for Devops Weekly at http://devopsweekly.com
+You can opt in for Devops Weekly at [http://devopsweekly.com](http://devopsweekly.com)
 
 [jekyll]:    http://jekyllrb.com
