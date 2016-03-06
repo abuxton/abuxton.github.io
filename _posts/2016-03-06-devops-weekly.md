@@ -12,7 +12,7 @@ comments: false
 share: true
 ---
 
-I like to share the wealth of data and solutions available to everyone, one of my favourites is Devops Weekly Newsletter. Authored by Gareth Rushgrove, its his weekly round up of all things tech. There are always more than one interesting article, opinion or download to be gained from teh weekly post out.
+I like to share the wealth of data and solutions available to everyone, one of my favourites is Devops Weekly Newsletter. Authored by Gareth Rushgrove, it's his weekly round up of all things tech. There are always more than one interesting article, opinion or download to be gained from his weekly updates.
 
 I've presented todays issue below for for you to sample but go grab the lder ones, and subscribe if you can.  
 
@@ -30,7 +30,7 @@ Devops Weekly is sponsored by Brightbox Cloud: the multi-zone cloud platform bui
 
 Try an SSD cloud server in 30 seconds with your £20 free credit…
 
-http://brightbox.com/devopsweekly
+[ttp://brightbox.com/devopsweekly](http://brightbox.com/devopsweekly){:target="_blank"}
 
 
 Sponsored
@@ -40,7 +40,7 @@ Sponsored
 
 Inspired by the famous 6th century Chinese manuscript: The Art of War, this eBook discusses DevOps in the form of a mission to continuously deliver assets to the operational battlegrounds safely, securely, and quickly.
 
-http://ow.ly/U3Jlm
+[http://ow.ly/U3Jlm](http://ow.ly/U3Jlm){:target="_blank"}
 
 
 News
@@ -48,7 +48,7 @@ News
 
 I’m nearly always happy to help promote surveys as the more folks who complete them the more interesting the results tend to be. This survey from The New Stack is covering a wide breadth of real-world container usage.
 
-http://thenewstack.io/container-orchestration-survey/
+[http://thenewstack.io/container-orchestration-survey/](http://thenewstack.io/container-orchestration-survey/){:target="_blank"}
 
 
 There are a wide range of different ways of presenting timeseries metrics, and it’s easy to just rely on obvious presentations. This post digs into lots of different ways of presenting timeseries data, and why you might use each of them.
