@@ -14,8 +14,9 @@ share: true
 
 I like to share the wealth of data and solutions available to everyone, one of my favourites is Devops Weekly Newsletter. Authored by Gareth Rushgrove, it's his weekly round up of all things tech. There are always more than one interesting article, opinion or download to be gained from his weekly updates.
 
-I've presented todays issue below for for you to sample but go grab the lder ones, and subscribe if you can.  
+I've presented todays issue below for for you to sample but go grab the older ones, and subscribe if you can.  
 
+```text
 
 DEVOPS WEEKLY
 ISSUE #271 - 6th March 2016
@@ -134,5 +135,6 @@ http://brightbox.com/devopsweekly
 
 
 You can opt in for Devops Weekly at [http://devopsweekly.com](http://devopsweekly.com){:target="_blank"}
+```
 
 [jekyll]:    http://jekyllrb.com
