@@ -3,7 +3,7 @@ layout: post
 title: "Life at Puppet"
 description: "A short post on my return to Puppet"
 category:
-tags: [post,article,blog,,abc,puppet,devops,nextgendevps,project management,Product ownership]
+tags: [post,article,blog,abc,puppet,devops,nextgendevps,project management,Product ownership]
 image:
  feature:
  credit:
