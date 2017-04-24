@@ -20,4 +20,3 @@ A year out of Puppet and 13 months since I last posted, I return. Were did I go?
 
 
 [jekyll]:    http://jekyllrb.com
-{% include JB/setup %}
