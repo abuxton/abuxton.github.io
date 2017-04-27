@@ -9,14 +9,10 @@ CONFIG = {
   'themes' => File.join(SOURCE, "_includes", "themes"),
   'layouts' => File.join(SOURCE, "_layouts"),
   'posts' => File.join(SOURCE, "_posts"),
-  'drafts' => File.join(SOURCE, "_drafts"),
   'post_ext' => "md",
   'theme_package_version' => "0.1.0"
 }
 
-task :default do
-  system "rake --tasks -A"
-  end
 # Path configuration helper
 module JB
   class Path
@@ -28,8 +24,7 @@ module JB
       :theme_packages => "_theme_packages",
       :posts => "_posts"
     }
-  
-
+    
     def self.base
       SOURCE
     end
@@ -73,56 +68,10 @@ task :post do
     post.puts 'description: ""'
     post.puts "category: #{category}"
     post.puts "tags: #{tags}"
-    post.puts "image:"
-    post.puts " feature: "
-    post.puts " credit:"
-    post.puts " creditlink:"
-    post.puts "comments: false"
-    post.puts "share: true"
     post.puts "---"
     post.puts "{% include JB/setup %}"
   end
 end # task :post
-
-# Usage: rake draft title="A Title" [date="2012-02-09"] [tags=[tag1,tag2]] [category="category"]
-desc "Begin a new draft in #{CONFIG['drafts']}"
-task :draft do
-  abort("rake aborted: '#{CONFIG['drafts']}' directory not found.") unless FileTest.directory?(CONFIG['drafts'])
-  title = ENV["title"] || "new-draft"
-  tags = ENV["tags"] || "[]"
-  category = ENV["category"] || ""
-  category = "\"#{category.gsub(/-/,' ')}\"" if !category.empty?
-  slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  begin
-    date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
-  rescue => e
-    puts "Error - date format must be YYYY-MM-DD, please check you typed it correctly!"
-    exit -1
-  end
-  filename = File.join(CONFIG['drafts'], "#{date}-#{slug}.#{CONFIG['post_ext']}")
-  if File.exist?(filename)
-    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
-  end
-  
-  puts "Creating new draft: #{filename}"
-  open(filename, 'w') do |draft|
-    draft.puts "---"
-    draft.puts "layout: post"
-    draft.puts "title: \"#{title.gsub(/-/,' ')}\""
-    draft.puts 'description: ""'
-    draft.puts "category: #{category}"
-    draft.puts "tags: #{tags}"
-    draft.puts "image:"
-    draft.puts " feature: "
-    draft.puts " credit:"
-    draft.puts " creditlink:"
-    draft.puts "comments: false"
-    draft.puts "share: true"
-    draft.puts "---"
-    draft.puts "{% include JB/setup %}"
-  end
-end # task :draft
-
 
 # Usage: rake page name="about.html"
 # You can also specify a sub-directory path.
@@ -355,4 +304,3 @@ end
 
 #Load custom rake scripts
 Dir['_rake/*.rake'].each { |r| load r }
-
