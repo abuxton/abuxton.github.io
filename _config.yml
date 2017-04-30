@@ -14,8 +14,7 @@ picture: assets/images/profile.jpg
 # and specify source (external or local).
 resume: true
 resume-external: true
-resume-url: https://google.com/?q=my+resume
-
+resume-url: https://www.linkedin.com/in/adambuxton/
 url: http://abuxton.github.io
 # your url: http://USERNAME.github.io
 
