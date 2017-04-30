@@ -12,7 +12,7 @@ category: post
 author: adambuxton
 externalLink: false
 ---
-{% #include JB/setup %}
+
 
 All the things to discuss, or is that disqus! This started out as a simple post in my head then it grew.
 
