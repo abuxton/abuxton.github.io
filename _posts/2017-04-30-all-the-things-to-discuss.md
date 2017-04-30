@@ -5,7 +5,7 @@ date: 2017-04-30 00:00
 tag: Puppet,discussion,disqus,devops,tenancy,oprations,development,adoption
 image: https://abuxton.github.io/assets/images/puppet-graph.jpg
 headerImage: true
-projects: true
+projects: false
 hidden: false # don't count this post in blog pagination
 description: "All the things to discuss, or is that disqus! a simple post listing intentions to discuss Puppe, Devops and coffee."
 category: post
