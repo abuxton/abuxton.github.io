@@ -5,7 +5,8 @@ layout: page
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 <p>
 <quote>`Digital` </quote>~  Involving or relating to the use of computer technology. Such as ‘the digital revolution’. <a href='https://en.oxforddictionaries.com/definition/digital'>Oxford Eng.</a>
-
+</p>
+<p>
 <quote>`Adept` </quote>~ Very skilled or proficient at something. ‘she is adept at cutting through red tape’, or ‘an adept negotiator’.<a href='https://en.oxforddictionaries.com/definition/adept'>Oxford Eng.</a>
 </p>
 
