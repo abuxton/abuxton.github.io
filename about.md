@@ -12,7 +12,7 @@ layout: page
 <p>
 A keen `technologist`, passionate about new technology, DevOps practices and a balanced approach to Agile development, configuration management and operations in a world where no single system as a single authoritative owner, standard or approach.
 
-Fortunate enough to travel the world throgh work and discuss these subjects and more over Coffee and code.
+Fortunate enough to travel the world through work and discuss these subjects and more over Coffee and code.
 </p>
 
 ```Puppet
@@ -23,5 +23,5 @@ class { 'coffee' :
   provider  => 'pourover',
   stage     => 'first'
     {
-    
+
 ```
