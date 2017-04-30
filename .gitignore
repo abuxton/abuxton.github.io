@@ -3,6 +3,7 @@ test/dest
 pkg/
 *.swp
 *~
+_theme_packages/
 _site/
 .bundle/
 .DS_Store
