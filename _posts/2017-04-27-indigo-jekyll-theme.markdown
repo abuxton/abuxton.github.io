@@ -1,5 +1,5 @@
 ---
-title: ":ramen: Indigo, minimalist jekyll theme, updates for manifest"
+title: ":ramen: Indigo, minimalist Jekyll theme, updates for manifest"
 layout: post
 date: 2017-04-29 00:00
 tag: jekyll

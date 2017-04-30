@@ -30,11 +30,11 @@ permalink: /:title/
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
-  shortname: mydisqus # enter this from your disqus account
+  shortname: digitaladept  # enter this from your disqus account
   categories: [blog, project] # only show disqus for posts that have these categories
 
 # if you don't have any of social below, comment the line
-# facebook: 
+# facebook:
 twitter: digitaladept
 # google: mygoogle
 # instagram: myinstagram
@@ -54,11 +54,11 @@ email: adam@digitaladept.com
 authors:
     adambuxton:
         name: adam buxton
-        bio: A Man who travels the world discussing tech, and drinking coffee.
+        bio: A man who travels the world discussing tech, and drinking coffee.
         external-image: false
         picture: assets/images/profile.jpg
         twitter: digitaladept
-   
+
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
 # normal = 560px / large = 810px
