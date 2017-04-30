@@ -12,11 +12,11 @@ category: post
 author: adambuxton
 externalLink: false
 ---
-{% include JB/setup %}
+{% #include JB/setup %}
 
 All the things to discuss, or is that disqus! This started out as a simple post in my head then it grew.
 
-I was also going to try categories all the things, but as with most subjects the spheres of concern appear to be a [Venn diagram](https://xkcd.com/747/) of a whole! or is that a hole! ![https://xkcd.com/747/](https://imgs.xkcd.com/comics/geeks_and_nerds.png)
+I was also going to try categories all the things, but as with most subjects the spheres of concern appear to be a [Venn diagram](https://xkcd.com/747) of a whole! or is that a hole! ![https://xkcd.com/747/](https://imgs.xkcd.com/comics/geeks_and_nerds.png)
 
 [Multitennancy](https://en.wikipedia.org/wiki/Multitenancy) wikipedia sums this up pretty well!
 <quote>
@@ -31,6 +31,6 @@ Adoption is another subject I find passion for, adoption of configuration manage
 Monitoring Puppet, no not with Puppet but of Puppet. Let's not just think of process and system alerting but how do we actually monitor assurance, and how can we use additional monitoring for additional assurance. This subject merges into the tenants boundary discussion so it will feature at some point.
 ---
 
-Devops best practices and general information, I posted about Gareth Rushgroves excellent Devops Weekly before  [http://abuxton.github.io/devops-weekly/](http://abuxton.github.io/devops-weekly/). The archive for which is still not being kept upto (I spoke to him, he's busy) so I may post irregularly with snippets or TL;DR of some subjects from there.
+Devops best practices and general information, I posted about Gareth Rushgroves excellent Devops Weekly before  [http://abuxton.github.io/devops-weekly/](http://abuxton.github.io/devops-weekly). The archive for which is still not being kept upto (I spoke to him, he's busy) so I may post irregularly with snippets or TL;DR of some subjects from there.
 
 ---
