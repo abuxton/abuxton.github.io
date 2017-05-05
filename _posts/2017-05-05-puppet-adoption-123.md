@@ -42,4 +42,4 @@ So as part of these articles on Puppet adoption or indeed adoption of `Configura
 * Do we do everything at once? No, see that was easy.
 * What should we manage with Puppet? The smallest possible things first, after you have assessed the gains and benefits to prioritise which one of them you want to do first.
 
-Really it's that easy. You won't believe me, I know you won't, after all I've told dozens of customers this over several years now and noone ever does. i will grow these articles out to discuss the Hows, Whys and Wherefores with Puppet and Configuration Management Systems. But you'll have to stay tuned.  
+Really it's that easy. You won't believe me, I know you won't, after all I've told dozens of customers this over several years now and noone ever does. I will grow these articles out to discuss the Hows, Whys and Wherefores with Puppet and Configuration Management Systems. But you'll have to stay tuned.  
