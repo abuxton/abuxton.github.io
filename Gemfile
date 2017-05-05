@@ -23,5 +23,5 @@ gem "github-pages", group: :jekyll_plugins
 group :jekyll_plugins do
    gem "jekyll-feed", "~> 0.6"
 end
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Helpi
+#Contact GitHub API Training Shop Blog About
+#© 2017 GitHub, Inc. Terms Privacy Security Status Helpi
