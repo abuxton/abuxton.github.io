@@ -36,10 +36,10 @@ Yeah even writing out that wall of text provides a small insight into what event
 
 The various levels of engagement with these concepts and processes, the various issues with their reuse and usability and the varying cost in money, time and effort in both use of infrastructure, hardware and personell development terms, are what make configuration  management so appealing.
 
-So as part of these articles on Puppet adoption or indeed adoption of `Configuration Management` let me give you the short answer to the three questions.
+So as part of these articles on Puppet adoption or indeed adoption of Configuration Management let me give you the short answer to the three questions.
 
 * Where do we start? By assessing your current process and putting Puppet at the end of it. Honestly simply install Puppet every where.
 * Do we do everything at once? No, see that was easy.
 * What should we manage with Puppet? The smallest possible things first, after you have assessed the gains and benefits to prioritise which one of them you want to do first.
 
-Really it's that easy. You won't believe me, I know you won't, after all I've told dozens of customers this over several years now and noone ever does. I will grow these articles out to discuss the Hows, Whys and Wherefores with Puppet and Configuration Management Systems. But you'll have to stay tuned.  
+Really it's that easy. You won't believe me, I know you won't, after all I've told dozens of customers this over several years now, and no one ever does. I will grow these articles out to discuss the Hows, Whys and Wherefores with Puppet and Configuration Management Systems. But you'll have to stay tuned.
