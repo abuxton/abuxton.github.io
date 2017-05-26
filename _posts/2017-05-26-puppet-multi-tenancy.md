@@ -14,7 +14,7 @@ So in a brake from my articles on Puppet adoption, I decided that I'd like to wr
 
 If you were hoping for more on the Puppet Adoption series or you've not read them they're linked in the footer I'm sure, but just incase, they start with [Puppet Adoption 123 - part one](https://abuxton.github.io/puppet-adoption-123/) and I'll get back to them with Part 4 soon.
 
-## Where, What, Who and Why of DevOps.
+## Where, What, Who and Why of DevOps. 
 
 I realised when I started to think more deeply about this subject it quickly became clear that what we are talking about is really scope of `Influence`, `Concern`, `Capability` and `Visibility`, and the keys are knowing `Who` influences `Who` and `How`, `What` each party is `concerned` with, `Who` as the `capability` to affect the requirements, and `Who` needs visibility of `What` from the system.
 
