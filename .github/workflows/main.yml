@@ -1,2 +1,0 @@
-- name: Release GitHub Pages
-  uses: igolopolosov/github-action-release-github-pages@v1
