@@ -14,7 +14,7 @@ So in a brake from my articles on Puppet adoption, I decided that I'd like to wr
 
 If you were hoping for more on the Puppet Adoption series or you've not read them they're linked in the footer I'm sure, but just incase, they start with [Puppet Adoption 123 - part one](https://abuxton.github.io/puppet-adoption-123/) and I'll get back to them with Part 4 soon.
 
-## Where, What, Who and Why of DevOps. 
+## Where, What, Who and Why of DevOps.
 
 I realised when I started to think more deeply about this subject it quickly became clear that what we are talking about is really scope of `Influence`, `Concern`, `Capability` and `Visibility`, and the keys are knowing `Who` influences `Who` and `How`, `What` each party is `concerned` with, `Who` as the `capability` to affect the requirements, and `Who` needs visibility of `What` from the system.
 
@@ -24,7 +24,4 @@ So I broke this down, now it was `Who`, `What`, and `Where` in relation to `Infl
 I'm going to think about it a little more and then provide articles on the subject, but my initial mind map looked like the below
 ![`Who`, `What`, and `Where` in relation to `Influence`, `Concern`, `Capability` and `Visibility` mind map]( https://abuxton.github.io/assets/images/pmt-mm.jpg)
 
-The links below will all 404, intentionally until I revisit and create the pages, and update the links.
-* [Who, What and Where of multi-tenancy- part 1 'The Who'](https://abuxton.github.io/multi-tenancy-part1-who/)
-* [Who, What and Where of multi-tenancy - part 2 'The What'](https://abuxton.github.io/multi-tenancy-part2-what/)
-* [Who, What and Where of multi-tenancy - part 3 'The Where'](https://abuxton.github.io/multi-tenancy-part3-where/)
+**edit** 24th June 2020, 3 years and many miles later I came back to this.. Puppet as changed * A LOT * as such some of my thoughts have been norn out and others are now invalid. So you'll never see the rest of this post.
