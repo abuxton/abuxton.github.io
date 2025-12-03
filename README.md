@@ -1,78 +1,96 @@
-# Jekyll-Bootstrap
+# abuxton.github.io
 
-The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages
+The home for [abuxton.github.io](http://abuxton.github.io)
 
-## Usage
+## Overview
 
-For all usage and documentation please see: <http://jekyllbootstrap.com>
+This is a Jekyll-based static site hosted on GitHub Pages. The repository contains source files, Makefiles, and build configuration across multiple branches:
 
-## Version
+- **`main`** – Development branch; source, Makefiles, Jekyll configuration
+- **`gh-pages`** – Published site (deployed via `make deploy-gh-pages`)
+- **`archive`** – Historical/archived site versions (optional backup)
 
-0.3.0 - stable and versioned using [semantic versioning](http://semver.org/).
+## Quick Start
 
-**NOTE:** 0.3.0 introduces a new theme which is not backwards compatible in the sense it won't _look_ like the old version.
-However, the actual API has not changed at all.
-You might want to run 0.3.0 in a branch to make sure you are ok with the theme design changes.
+### Prerequisites
 
-## Milestones
+- Ruby (see `.ruby-version`)
+- Bundler
+- GNU Make
 
-[0.4.0](https://github.com/plusjade/jekyll-bootstrap/milestones/v%200.4.0) - next release [ETA 03/29/2015]
+### Setup
 
-### GOALS
+```bash
+git clone https://github.com/abuxton/abuxton.github.io.git
+cd abuxton.github.io
+git co -b feature/my-ghpages gh-pages
+make bundle-install
+```
 
-* No open PRs against master branch.
-* Squash some bugs.
-* Add some new features (low-hanging fruit).
-* Establish social media presence.
+### Local Development
 
+Serve the site locally with livereload:
 
-### Bugs
+```bash
+make jekyll-serve
+```
 
-|Bug |Description
-|------|---------------
-|[#86](https://github.com/plusjade/jekyll-bootstrap/issues/86)  |&#x2611; Facebook Comments
-|[#113](https://github.com/plusjade/jekyll-bootstrap/issues/113)|&#x2611; ASSET_PATH w/ page & post
-|[#144](https://github.com/plusjade/jekyll-bootstrap/issues/144)|&#x2610; BASE_PATH w/ FQDN
-|[#227](https://github.com/plusjade/jekyll-bootstrap/issues/227)|&#x2611; Redundant JB/setup
+Browse to `http://localhost:4000`
 
-### Features
+## Common Tasks
 
-|Bug |Description
-|------|---------------
-|[#98](https://github.com/plusjade/jekyll-bootstrap/issues/98)  |&#x2611; GIST Integration
-|[#244](https://github.com/plusjade/jekyll-bootstrap/issues/244)|&#x2611; JB/file_exists Helper
-|[#42](https://github.com/plusjade/jekyll-bootstrap/issues/42)  |&#x2611; Sort collections of Pages / Posts
-|[#84](https://github.com/plusjade/jekyll-bootstrap/issues/84)  |&#x2610; Detecting production mode
+| Task | Command | Notes |
+|------|---------|-------|
+| Serve locally | `make jekyll-serve` | Livereload enabled |
+| Build site | `make jekyll-build` | Output to `_site/` |
+| Clean build | `make jekyll-clean` | Remove `_site/` |
+| New post | `make new-post title="My Title"` | Scaffolds `_posts/` file |
+| Deploy | `make deploy-gh-pages` | Build + push to gh-pages |
+| Show help | `make help-ruby` | Ruby/Bundler targets |
 
-### TODOS
+## Project Structure
 
-Review existing pull requests against plusjake/jekyll-bootstrap:master. Merge or close each.
+```
+.
+├── _posts/                   # Blog posts
+├── _layouts/                 # Page templates
+├── _includes/                # Reusable components
+├── _site/                    # Built site (generated)
+├── assets/                   # CSS, JS, images
+├── common/bin/
+│   ├── ruby.mk              # Ruby/Bundler Makefile helpers
+│   └── jekyll.mk            # Jekyll/gh-pages Makefile helpers
+├── Gemfile                   # Ruby dependencies
+├── _config.yml               # Jekyll configuration
+├── .ruby-version             # Ruby version pinning
+└── README.md                 # This file
+```
 
-* Create twitter account. Add link / icon on jekyllbootstrap.com.
-* Create blog posts under plusjade/gh-pages, expose on jekyllbootstrap.com, feed to twitter account.
-* Announce state of project, announce roadmap(s), announce new versions as they’re released.
+## Deployment
 
-## Contributing
+Deploy to GitHub Pages:
 
+```bash
+make deploy-gh-pages
+```
 
-To contribute to the framework please make sure to checkout your branch based on `jb-development`!!
-This is very important as it allows me to accept your pull request without having to publish a public version release.
+This:
+1. Builds the Jekyll site
+2. Pushes built content to the `gh-pages` branch
+3. Site goes live at [abuxton.github.io](http://abuxton.github.io)
 
-Small, atomic Features, bugs, etc.
-Use the `jb-development` branch but note it will likely change fast as pull requests are accepted.
-Please rebase as often as possible when working.
-Work on small, atomic features/bugs to avoid upstream commits affecting/breaking your development work.
+## Ruby & Bundler
 
-For Big Features or major API extensions/edits:
-This is the one case where I'll accept pull-requests based off the master branch.
-This allows you to work in isolation but it means I'll have to manually merge your work into the next public release.
-Translation : it might take a bit longer so please be patient! (but sincerely thank you).
+All commands run through the active Ruby environment (rbenv or rvm if available):
 
-**Jekyll-Bootstrap Documentation Website.**
-
-The documentation website at <http://jekyllbootstrap.com> is maintained at https://github.com/plusjade/jekyllbootstrap.com
-
+```bash
+make ruby-info              # Show Ruby/Bundler versions
+make bundle-install         # Install Gemfile dependencies
+make run-rake TASK="foo"     # Run rake task
+make gem-install GEM="name"  # Install a gem
+```
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[Add license]
+
