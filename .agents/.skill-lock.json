@@ -351,6 +351,15 @@
       "skillFolderHash": "70da151c48138fb11056d1389f8b6bc4b5d471fc",
       "installedAt": "2026-02-27T15:28:55.567Z",
       "updatedAt": "2026-02-27T15:28:55.567Z"
+    },
+    "jekyll-blog": {
+      "source": "abuxton/abuxton.github.io",
+      "sourceType": "local",
+      "sourceUrl": "https://github.com/abuxton/abuxton.github.io",
+      "skillPath": ".agents/skills/jekyll-blog/SKILL.md",
+      "skillFolderHash": "local",
+      "installedAt": "2026-02-27T19:00:00.000Z",
+      "updatedAt": "2026-02-27T19:00:00.000Z"
     }
   },
   "dismissed": {
