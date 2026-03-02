@@ -1,0 +1,198 @@
+{
+  "version": 3,
+  "skills": {
+    "jira": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
+      "skillPath": "skills/jira/SKILL.md",
+      "skillFolderHash": "c727e041f8c55d018d6dd97a871b8ff2572dafe5",
+      "installedAt": "2026-02-26T11:10:27.399Z",
+      "updatedAt": "2026-02-26T11:10:27.399Z"
+    },
+    "writing-clearly-and-concisely": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
+      "skillPath": "skills/writing-clearly-and-concisely/SKILL.md",
+      "skillFolderHash": "4bb2d919b567277219f7a18358bd05e0a1679a77",
+      "installedAt": "2026-02-26T11:10:27.420Z",
+      "updatedAt": "2026-02-26T11:10:27.420Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "installedAt": "2026-02-26T11:10:35.620Z",
+      "updatedAt": "2026-02-26T11:10:35.620Z"
+    },
+    "playwright-cli": {
+      "source": "microsoft/playwright-cli",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
+      "skillPath": "skills/playwright-cli/SKILL.md",
+      "skillFolderHash": "a5a8823e403adc13b2488aae9968d6d92adbd2d7",
+      "installedAt": "2026-02-26T11:12:43.652Z",
+      "updatedAt": "2026-02-26T11:12:43.652Z"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "skillFolderHash": "5c26c1472b98de33a48074ba5d3efe3a727b8e37",
+      "installedAt": "2026-02-26T11:30:34.131Z",
+      "updatedAt": "2026-02-26T11:30:34.131Z"
+    },
+    "ansible-automation": {
+      "source": "aj-geddes/useful-ai-prompts",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/aj-geddes/useful-ai-prompts.git",
+      "skillPath": "skills/ansible-automation/SKILL.md",
+      "skillFolderHash": "1769e294ab52cc17afe5a72b3623b2e6be6d678a",
+      "installedAt": "2026-02-26T11:35:52.640Z",
+      "updatedAt": "2026-02-26T11:35:52.640Z"
+    },
+    "markdown-documentation": {
+      "source": "aj-geddes/useful-ai-prompts",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/aj-geddes/useful-ai-prompts.git",
+      "skillPath": "skills/markdown-documentation/SKILL.md",
+      "skillFolderHash": "a464981287a76c6a7efa16ec81fe67cae63d5665",
+      "installedAt": "2026-02-26T11:36:53.507Z",
+      "updatedAt": "2026-02-26T11:36:53.507Z"
+    },
+    "user-story-writing": {
+      "source": "aj-geddes/useful-ai-prompts",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/aj-geddes/useful-ai-prompts.git",
+      "skillPath": "skills/user-story-writing/SKILL.md",
+      "skillFolderHash": "9e48382570fca082748e9c3b54f3ab70ee36895c",
+      "installedAt": "2026-02-26T11:39:13.539Z",
+      "updatedAt": "2026-02-26T11:39:13.539Z"
+    },
+    "obs-memory": {
+      "source": "adamtylerlynch/obsidian-agent-memory-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/adamtylerlynch/obsidian-agent-memory-skills.git",
+      "skillPath": "skills/obs/SKILL.md",
+      "skillFolderHash": "9c54b64225973ba206e5ce9b962e28919dcbf64e",
+      "installedAt": "2026-02-26T11:42:39.136Z",
+      "updatedAt": "2026-02-26T11:42:39.136Z"
+    },
+    "github-actions-creator": {
+      "source": "davila7/claude-code-templates",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/davila7/claude-code-templates.git",
+      "skillPath": "cli-tool/components/skills/development/github-actions-creator/SKILL.md",
+      "skillFolderHash": "fb4029f05c29e6df613c58a5a24b809805174c21",
+      "installedAt": "2026-02-27T09:02:29.477Z",
+      "updatedAt": "2026-02-27T09:02:29.477Z"
+    },
+    "commit": {
+      "source": "seabbs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/seabbs/skills.git",
+      "skillPath": "plugins/dev-workflow/skills/commit/SKILL.md",
+      "skillFolderHash": "f3e1b4f3a04d74d406d10e6f4713c7db690014d1",
+      "installedAt": "2026-02-27T09:57:49.759Z",
+      "updatedAt": "2026-02-27T09:57:49.759Z"
+    },
+    "issue-reply": {
+      "source": "seabbs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/seabbs/skills.git",
+      "skillPath": "plugins/github-ops/skills/issue-reply/SKILL.md",
+      "skillFolderHash": "5618850e275c9e26f1477637653e568d49b1f006",
+      "installedAt": "2026-02-27T09:57:49.780Z",
+      "updatedAt": "2026-02-27T09:57:49.780Z"
+    },
+    "issue-summary": {
+      "source": "seabbs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/seabbs/skills.git",
+      "skillPath": "plugins/github-ops/skills/issue-summary/SKILL.md",
+      "skillFolderHash": "d1647cc9e8508c952df68aac6ba3c89c85bfa5e5",
+      "installedAt": "2026-02-27T09:57:49.794Z",
+      "updatedAt": "2026-02-27T09:57:49.794Z"
+    },
+    "pr": {
+      "source": "seabbs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/seabbs/skills.git",
+      "skillPath": "plugins/dev-workflow/skills/pr/SKILL.md",
+      "skillFolderHash": "3cff750f8a06d8fb88d1dd2bb91eea151fcb1c53",
+      "installedAt": "2026-02-27T09:57:49.809Z",
+      "updatedAt": "2026-02-27T09:57:49.809Z"
+    },
+    "taskfile-automation": {
+      "source": "seabbs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/seabbs/skills.git",
+      "skillPath": "plugins/dev-workflow/skills/taskfile-automation/SKILL.md",
+      "skillFolderHash": "dcf14b03607b3436b0163b38d9f885ea9c4c2533",
+      "installedAt": "2026-02-27T09:57:49.822Z",
+      "updatedAt": "2026-02-27T09:57:49.822Z"
+    },
+    "jira-cli": {
+      "source": "code-and-sorts/awesome-copilot-agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/code-and-sorts/awesome-copilot-agents.git",
+      "skillPath": "skills/jira-cli/SKILL.md",
+      "skillFolderHash": "d5fe6c4458139af3f45a521824224b9a8afc9f6a",
+      "installedAt": "2026-02-27T11:03:29.335Z",
+      "updatedAt": "2026-02-27T11:03:29.335Z"
+    },
+    "do-nothing-scripting": {
+      "source": "abuxton/Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/abuxton/Skills.git",
+      "skillPath": "skills/do-nothing-scripting/SKILL.md",
+      "skillFolderHash": "91eadcaf748aa6cd6f4f289ddc6740c1f73d5023",
+      "installedAt": "2026-02-27T15:28:55.540Z",
+      "updatedAt": "2026-02-27T15:28:55.540Z"
+    },
+    "github-gist": {
+      "source": "abuxton/Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/abuxton/Skills.git",
+      "skillPath": "skills/github-gist/SKILL.md",
+      "skillFolderHash": "37dc012b3095d5476e6f992b2e6db95b9f786532",
+      "installedAt": "2026-02-27T15:28:55.555Z",
+      "updatedAt": "2026-02-27T15:28:55.555Z"
+    },
+    "asciinema-record": {
+      "source": "abuxton/Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/abuxton/Skills.git",
+      "skillPath": "skills/asciinema-record/SKILL.md",
+      "skillFolderHash": "70da151c48138fb11056d1389f8b6bc4b5d471fc",
+      "installedAt": "2026-02-27T15:28:55.567Z",
+      "updatedAt": "2026-02-27T15:28:55.567Z"
+    },
+    "jekyll-blog": {
+      "source": "abuxton/abuxton.github.io",
+      "sourceType": "local",
+      "sourceUrl": "https://github.com/abuxton/abuxton.github.io",
+      "skillPath": ".agents/skills/jekyll-blog/SKILL.md",
+      "skillFolderHash": "local",
+      "installedAt": "2026-02-27T19:00:00.000Z",
+      "updatedAt": "2026-02-27T19:00:00.000Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "cline",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode"
+  ]
+}
