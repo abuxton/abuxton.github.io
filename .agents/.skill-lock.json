@@ -1,15 +1,6 @@
 {
   "version": 3,
   "skills": {
-    "jira": {
-      "source": "softaworks/agent-toolkit",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
-      "skillPath": "skills/jira/SKILL.md",
-      "skillFolderHash": "c727e041f8c55d018d6dd97a871b8ff2572dafe5",
-      "installedAt": "2026-02-26T11:10:27.399Z",
-      "updatedAt": "2026-02-26T11:10:27.399Z"
-    },
     "writing-clearly-and-concisely": {
       "source": "softaworks/agent-toolkit",
       "sourceType": "github",
@@ -45,15 +36,6 @@
       "skillFolderHash": "5c26c1472b98de33a48074ba5d3efe3a727b8e37",
       "installedAt": "2026-02-26T11:30:34.131Z",
       "updatedAt": "2026-02-26T11:30:34.131Z"
-    },
-    "ansible-automation": {
-      "source": "aj-geddes/useful-ai-prompts",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/aj-geddes/useful-ai-prompts.git",
-      "skillPath": "skills/ansible-automation/SKILL.md",
-      "skillFolderHash": "1769e294ab52cc17afe5a72b3623b2e6be6d678a",
-      "installedAt": "2026-02-26T11:35:52.640Z",
-      "updatedAt": "2026-02-26T11:35:52.640Z"
     },
     "markdown-documentation": {
       "source": "aj-geddes/useful-ai-prompts",
@@ -126,51 +108,6 @@
       "skillFolderHash": "3cff750f8a06d8fb88d1dd2bb91eea151fcb1c53",
       "installedAt": "2026-02-27T09:57:49.809Z",
       "updatedAt": "2026-02-27T09:57:49.809Z"
-    },
-    "taskfile-automation": {
-      "source": "seabbs/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/seabbs/skills.git",
-      "skillPath": "plugins/dev-workflow/skills/taskfile-automation/SKILL.md",
-      "skillFolderHash": "dcf14b03607b3436b0163b38d9f885ea9c4c2533",
-      "installedAt": "2026-02-27T09:57:49.822Z",
-      "updatedAt": "2026-02-27T09:57:49.822Z"
-    },
-    "jira-cli": {
-      "source": "code-and-sorts/awesome-copilot-agents",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/code-and-sorts/awesome-copilot-agents.git",
-      "skillPath": "skills/jira-cli/SKILL.md",
-      "skillFolderHash": "d5fe6c4458139af3f45a521824224b9a8afc9f6a",
-      "installedAt": "2026-02-27T11:03:29.335Z",
-      "updatedAt": "2026-02-27T11:03:29.335Z"
-    },
-    "do-nothing-scripting": {
-      "source": "abuxton/Skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/abuxton/Skills.git",
-      "skillPath": "skills/do-nothing-scripting/SKILL.md",
-      "skillFolderHash": "91eadcaf748aa6cd6f4f289ddc6740c1f73d5023",
-      "installedAt": "2026-02-27T15:28:55.540Z",
-      "updatedAt": "2026-02-27T15:28:55.540Z"
-    },
-    "github-gist": {
-      "source": "abuxton/Skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/abuxton/Skills.git",
-      "skillPath": "skills/github-gist/SKILL.md",
-      "skillFolderHash": "37dc012b3095d5476e6f992b2e6db95b9f786532",
-      "installedAt": "2026-02-27T15:28:55.555Z",
-      "updatedAt": "2026-02-27T15:28:55.555Z"
-    },
-    "asciinema-record": {
-      "source": "abuxton/Skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/abuxton/Skills.git",
-      "skillPath": "skills/asciinema-record/SKILL.md",
-      "skillFolderHash": "70da151c48138fb11056d1389f8b6bc4b5d471fc",
-      "installedAt": "2026-02-27T15:28:55.567Z",
-      "updatedAt": "2026-02-27T15:28:55.567Z"
     },
     "jekyll-blog": {
       "source": "abuxton/abuxton.github.io",
