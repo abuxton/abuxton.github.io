@@ -55,20 +55,6 @@ The contact section points to the [Geek Card](./geekcard/README.md) — a small 
 
 The profile does not exist in isolation. The [abuxton/dotfiles](https://github.com/abuxton/dotfiles) repository is what actually configures the environment I work in day to day, and the two are increasingly connected.
 
-The dotfiles repository started as a fork of [Mathias Bynens' dotfiles](https://mths.be/dotfiles) and grew into something optimised for macOS, BSD, and ZSH. The classic structure — `.zshrc`, `.aliases`, `.functions.d/`, `bootstrap.sh`, `setup.sh` — remained stable for years.
-
-Then, in February 2026, a significant set of changes arrived. A sequence of pull requests rewired the repository:
-
-- **PR #1** — A major refactor adding agentic support configuration, introducing the `agents/` directory and `deploy-agents.sh` as a third deployment step alongside the existing `bootstrap.sh` and `setup.sh`.
-- **PR #2** — CI workflow fixes to validate the dotfiles consistently.
-- **PRs #4 and #5** — Validation hotfixes and workflow updates.
-- **PR #7 — Feat/agent refactor** (25 Feb 2026): Consolidated the agent configuration support.
-- **PR #8 — Add co-pilot instructions** (25 Feb 2026): GitHub Copilot-specific context arrived in the repository.
-- **PRs #9, #10, #11, #12** (26–27 Feb 2026): A rapid series adding and refining the skills framework.
-- **PR #13** (27 Feb 2026): Skills updated, completing the initial skills bundle.
-
-The net effect: a two-script dotfiles setup became a three-step environment that deploys shell configuration *and* AI agent context in a single run. The `~/.agents/` directory it creates contains skills, prompts, and commands that any AI agent can use, with symlinks for Copilot, Claude, and OpenCode.
-
 ## Why the Profile and the Dotfiles Belong Together
 
 The profile README is a document about how I work with people. The dotfiles are a document about how I work with machines. The skills framework is, increasingly, a document about how I work with AI agents.
