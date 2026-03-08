@@ -1,0 +1,114 @@
+name: Migrate Posts to gh-pages
+
+# Run this workflow manually from the Actions tab to copy blog posts
+# from the main branch to gh-pages branch.
+#
+# Usage:
+#   1. Trigger this workflow manually (Actions > Migrate Posts > Run workflow)
+#   2. Review the changes on gh-pages
+#   3. Merge the PR that removes posts from main
+#
+# This resolves issue #14: posts should live on gh-pages, not main.
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_branch:
+        description: 'Branch to copy posts FROM'
+        required: false
+        default: 'main'
+        type: string
+      target_branch:
+        description: 'Branch to copy posts TO'
+        required: false
+        default: 'gh-pages'
+        type: string
+      dry_run:
+        description: 'Dry run (show what would happen without making changes)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  migrate-posts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: List posts on source branch
+        run: |
+          echo "Posts on ${{ inputs.source_branch }}:"
+          git show origin/${{ inputs.source_branch }}:_posts/ 2>/dev/null || echo "(no _posts/ directory)"
+
+      - name: Migrate posts to target branch
+        run: |
+          SOURCE="${{ inputs.source_branch }}"
+          TARGET="${{ inputs.target_branch }}"
+          DRY_RUN="${{ inputs.dry_run }}"
+
+          echo "Migrating posts from '$SOURCE' to '$TARGET'..."
+
+          # Collect post filenames from source branch
+          POSTS=$(git ls-tree --name-only "origin/$SOURCE" _posts/ 2>/dev/null || true)
+
+          if [ -z "$POSTS" ]; then
+            echo "No posts found on '$SOURCE'. Nothing to migrate."
+            exit 0
+          fi
+
+          echo "Posts found on '$SOURCE':"
+          echo "$POSTS"
+
+          # Switch to target branch
+          git checkout "$TARGET"
+
+          mkdir -p _posts
+
+          ADDED=0
+          SKIPPED=0
+          for post in $POSTS; do
+            filename=$(basename "$post")
+            if [ -f "_posts/$filename" ]; then
+              echo "  SKIP (already exists): $filename"
+              SKIPPED=$((SKIPPED + 1))
+            else
+              echo "  ADD: $filename"
+              if [ "$DRY_RUN" = "false" ]; then
+                git show "origin/$SOURCE:_posts/$filename" > "_posts/$filename"
+              fi
+              ADDED=$((ADDED + 1))
+            fi
+          done
+
+          echo ""
+          echo "Summary: $ADDED post(s) to add, $SKIPPED already present."
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "(Dry run — no changes committed)"
+            exit 0
+          fi
+
+          if [ "$ADDED" -eq 0 ]; then
+            echo "No new posts to add. '$TARGET' is already up to date."
+            exit 0
+          fi
+
+          git add _posts/
+          git commit -m "feat(posts): migrate $ADDED post(s) from '$SOURCE' to '$TARGET'
+
+Migrated via workflow: migrate-posts-to-gh-pages
+Resolves: #14"
+          git push origin "$TARGET"
+          echo "Successfully pushed $ADDED new post(s) to '$TARGET'."
