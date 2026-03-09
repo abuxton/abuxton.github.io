@@ -59,22 +59,19 @@ jekyll-preview: ## Preview built site in default browser
 # Create a new post:
 # make new-post title="My Title" [slug="my-slug"] [layout="post"]
 new-post: ## Create a new post. Usage: make new-post title="My Title" [slug="my-slug"] [layout="post"]
-	@if [ -z "$(title)" ]; then echo "Usage: make new-post title=\"My Title\" [slug=\"my-slug\"] [layout=\"post\"]"; exit 1; fi
-	@layout=${layout:-post}; \
-	slug=$$( [ -n "$(slug)" ] && echo "$(slug)" || echo "$$(echo \"$(title)\" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$//g')"); \
+	@if [ -z "$(title)" ]; then \
+	  echo "Usage: make new-post title=\"My Title\" [slug=\"my-slug\"] [layout=\"post\"]"; \
+	  exit 1; \
+	fi
+	@layout=$${layout:-post}; \
+	slug=$$([ -n "$(slug)" ] && echo "$(slug)" || echo "$(title)" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$$//g'); \
 	date=$$(date "+%Y-%m-%d"); \
 	filename="_posts/$$date-$$slug.md"; \
 	mkdir -p "_posts"; \
 	if [ -e "$$filename" ]; then \
 	  echo "Post exists: $$filename"; \
 	else \
-	  cat > "$$filename" <<EOF
-	---
-	layout: $$layout
-	title: "$(title)"
-	date: $$(date -u +"%Y-%m-%d %H:%M:%S %z")
-	---
-	EOF
+	  { echo "---"; echo "layout: $$layout"; echo "title: \"$(title)\""; echo "date: $$(date -u +"%Y-%m-%d %H:%M:%S %z")"; echo "categories: blog"; echo "---"; echo ""; } > "$$filename"; \
 	  echo "Created $$filename"; \
 	fi
 

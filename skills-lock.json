@@ -16,6 +16,16 @@
       "sourceType": "github",
       "computedHash": "6962db07127ee540a56e4677f65576d0727668a1d67f7da8bc978f10791c2bfe"
     },
+    "gh-pages-deploy": {
+      "source": "aviz85/claude-skills-library",
+      "sourceType": "github",
+      "computedHash": "c46503265105b54e8c6bf149ab6194157e3885716414f3149c683a04013b05d6"
+    },
+    "git-workflow": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "a8f2d356cee50a0c64eeded9762de58d5227ba3a47b91cdd9889ba84dff9d020"
+    },
     "outline-coach": {
       "source": "jwynia/agent-skills",
       "sourceType": "github",
