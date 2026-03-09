@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "skills": {
+    "brainstorming": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "cd59bca73ac9878819320f0317ce093928c96ff55d78dcbfab9ce57e27a8a554"
+    },
+    "doc-coauthoring": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "b964e4c3ffe13f66f76dd7919073e60c7aec622cd8a8363bb36323188100cf8e"
+    },
+    "docx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "6962db07127ee540a56e4677f65576d0727668a1d67f7da8bc978f10791c2bfe"
+    },
+    "outline-coach": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d77eb9c39362aefc221cfb488f568756c6c0acaa145120153bb39341717889ed"
+    },
+    "outline-collaborator": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "b892f78d05166ce65329fd92bcc02c9f96253ba70a3533152fcb4ac86a66a87d"
+    },
+    "pdf": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "cfbc539377088ca7e44a813b30c306327385bbd973cd7a721e1743f60837dd62"
+    },
+    "pptx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "6b8b859d26f93aa059c9870d1ab76b44ab69e3d6757ce4a03cc94cb760888073"
+    },
+    "revealjs-presenter": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "7dbb7c7a2a8dd9573136377ee614430a9499f1e73489a8be3baf3df6f3a90bc8"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "b122f4d1e91aa1d83027e050b5b37c3156203ee85458d7b1360bc48167c9e02a"
+    },
+    "skill-integrator": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "1a09feaef633061461c2f9aba0f8c099f84a602b4a26187f8f1782d2129ad495"
+    },
+    "summarization": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "dccae874632a17de19f5e2366eb2fdb5b5f40c56bcd5f5d6c01e569cf9296c93"
+    },
+    "technology-impact": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "d6996b9d6e815b447467cedb4bf1a7f0ef3ab533b91167c0454ca74f94479e6f"
+    },
+    "template-skill": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "38c88f722b574a922311d334a70c2008a2a5b896f06eaa75516d716e5725b26f"
+    },
+    "xlsx": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "efd0c8011cf0677d8075cf93867ecec804f9a8754a777e1d2fdb46197e9c247f"
+    }
+  }
+}
