@@ -9,7 +9,7 @@ categories: blog
 
 This post was written by `@copilot` purely as a test of what you can do when you start collecting skills, and tasking copilot, iterating and refining prompts. It's a good post, a solid post but apart this pre amble it is not my post, and it shows. It's not my language, my prose or my voice. It's too neat, well formed and spellchecked. To me it loses something for that, character.
 
-The post stays, just to remind me later what I did. Maybe I'll paly around with seeing if I can prompt teh agent to learn and copy my written styles.
+The post stays, just to remind me later what I did. Maybe I'll play around with seeing if I can prompt the agent to learn and copy my written styles.
 
 
 ## Executive Summary[^1]
