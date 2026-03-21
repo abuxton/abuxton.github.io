@@ -6,7 +6,7 @@ categories: [engineering, ai, shadow-engineering]
 tags: [ai, llm, tokens, jensen-huang, nvidia, shadow-engineering, engineering-culture, individual-contributor]
 ---
 
-Jensen Huang recently posted a [YouTube Short](https://youtube.com/shorts/Hg0Vus39I60?si=vv6e7scq6GW0LEAr) that has stuck in my head — and not in a good way. His claim: a $500k salary engineer should be spending $250k in AI tokens. Half their salary, back into the model. That ratio — token spend as a proportion of compensation — is the metric he is proposing for a productive, AI-native engineer. I think he's wrong. Worse, I think it's wrong in a way that is going to damage how organisations think about the engineers they have and the engineers they hire.
+Jensen Huang recently was interviewed online and his comments spread viraally online and this is the segment [YouTube Short](https://youtube.com/shorts/Hg0Vus39I60?si=vv6e7scq6GW0LEAr) that has stuck in my head — and not in a good way. His claim: a $500k salary engineer should be spending $250k in AI tokens. Half their salary, back into the model. That ratio — token spend as a proportion of compensation — is the metric he is proposing for a productive, AI-native engineer. I think he's wrong. Worse, I think it's wrong in a way that is going to damage how organisations think about the engineers they have and the engineers they hire.
 
 Let me explain why.
 
