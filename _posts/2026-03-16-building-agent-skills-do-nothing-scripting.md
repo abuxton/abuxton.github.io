@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building Agent Skills: Do-Nothing Scripting and Gradual Automation"
-date: 2026-03-16 16:10:13 +0000
+date: 2026-04-05 16:10:13 +0000
 categories: [development, automation, agents]
 tags: [skills, do-nothing-scripting, automation, github-copilot, go, bash, agentskills]
 ---
