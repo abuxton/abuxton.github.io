@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - .github/workflows/pages-deploy.yml
+      - .nojekyll
   workflow_dispatch:
 
 permissions:
@@ -31,11 +32,8 @@ jobs:
           git fetch origin gh-pages
           git checkout gh-pages
 
-          # Copy the corrected workflow from main
-          git checkout main -- .github/workflows/pages-deploy.yml
-
-          # Add .nojekyll to prevent GitHub's native Jekyll builder
-          touch .nojekyll
+          # Copy the corrected workflow and .nojekyll from main
+          git checkout main -- .github/workflows/pages-deploy.yml .nojekyll
 
           git add .github/workflows/pages-deploy.yml .nojekyll
           git diff-index --quiet HEAD -- || \
