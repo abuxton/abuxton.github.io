@@ -1,0 +1,41 @@
+name: "Sync pages-deploy workflow to gh-pages"
+
+# When the corrected pages-deploy.yml lands on main, automatically
+# copy it (and .nojekyll) to the gh-pages branch so the custom Jekyll
+# build triggers correctly and GitHub's native builder is suppressed.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/pages-deploy.yml
+      - .nojekyll
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Sync workflow file and .nojekyll to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin gh-pages
+          git checkout gh-pages
+
+          # Copy the corrected workflow and .nojekyll from main
+          git checkout main -- .github/workflows/pages-deploy.yml .nojekyll
+
+          git add .github/workflows/pages-deploy.yml .nojekyll
+          git diff-index --quiet HEAD -- || \
+            git commit -m "fix: sync corrected pages-deploy workflow from main"
+          git push origin gh-pages
