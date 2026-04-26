@@ -2,7 +2,8 @@
 layout: post
 title: "Refactoring Agent Workflows"
 date: 2026-03-09 11:21:35 +0000
-categories: blog
+categories: [development, agents]
+tags: [agents, workflow, automation, openspec, plan-task-implementation, github-copilot]
 ---
 
 # Refactoring Agent Workflows: From OpenSpec to Plan-Task-Implementation
