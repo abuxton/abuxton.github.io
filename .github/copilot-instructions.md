@@ -2,15 +2,16 @@
 
 ## Project Overview
 
-This is a Jekyll-based personal blog hosted on GitHub Pages at `blog.abcdevelopment.co.uk`. It uses the `minima` theme and is deployed via the `github-pages` gem.
-The project is structured with a Makefile for task automation, and Ruby gems are managed via Bundler. The blog content is organized in the `_posts/` directory, with additional pages like `index.markdown` and `about.markdown` at the root.
+This is a Jekyll-based personal blog hosted on GitHub Pages at `blog.abcdevelopment.co.uk`. It uses the **Chirpy** theme (`cotes2020/jekyll-theme-chirpy` v7.x) and is deployed via GitHub Actions (`/.github/workflows/pages-deploy.yml`) — not via the `github-pages` gem, because Chirpy is not on the GitHub Pages safe-list.
+
+The project is structured with a Makefile for task automation, and Ruby gems are managed via Bundler. Blog content lives in `_posts/`, navigation tabs in `_tabs/`.
+
 ## Instructions
 
 - For any code changes, follow the **Plan → Tasks → Implementation** workflow outlined in `AGENTS.md`.
 - Use the Makefile for all build, serve, and maintenance tasks. Refer to `AGENTS.md` for available commands and their usage.
 - When creating new posts, use the `make new-post` target to scaffold the file with correct front matter.
-- Adhere to the post front matter convention for consistency across blog entries.
-- For documentation or content-related tasks, consider using the available skills like `doc-coauthoring` or `markdown-documentation` to assist with formatting and structuring content effectively.
+- Adhere to the post front matter convention below for consistency across blog entries.
 
 ## Build & Serve Commands
 
@@ -48,22 +49,23 @@ make new-post title="My Post Title"
 make new-post title="My Post Title" slug="my-post-slug"
 ```
 
-This scaffolds a file in `_posts/YYYY-MM-DD-slug.md` with the correct front matter. Existing posts use `.markdown` extension; new posts created by the Makefile use `.md` — both are valid.
+This scaffolds a file in `_posts/YYYY-MM-DD-slug.md` with the correct front matter.
 
 ## Architecture
 
-- `_config.yml` — site-wide settings (title, baseurl, theme, plugins)
+- `_config.yml` — site-wide settings (title, Chirpy options, plugins, etc.)
 - `_posts/` — blog posts as Markdown with Jekyll front matter
-- `index.markdown` — home page (`layout: home`)
-- `about.markdown` — about page (`layout: page`, permalink `/about/`)
+- `_tabs/` — Chirpy navigation tab pages: `about.md`, `archives.md`, `categories.md`, `tags.md`
+- `404.html` — custom 404 page
+- `CNAME` — sets the custom domain for GitHub Pages
 - `common/` — shared Makefile library (not site content):
   - `common/mk/core.mk` — entry point; includes the three mk modules below
   - `common/bin/jekyll.mk` — Jekyll-specific targets
   - `common/bin/ruby.mk` — Ruby/Bundler helpers and callable `make` functions
   - `common/bin/git.mk` — Git/GitHub CLI helpers
 - `Makefile` at repo root includes `common/mk/core.mk` to expose all targets
-- `CNAME` — sets the custom domain for GitHub Pages
-- `skills-lock.json` — locks Claude/agent skill versions (anthropics/skills, jwynia/agent-skills); do not edit manually
+- `.github/workflows/pages-deploy.yml` — GitHub Actions workflow that builds and deploys the site
+- `skills-lock.json` — locks Claude/agent skill versions; do not edit manually
 
 ## Post Front Matter Convention
 
@@ -72,8 +74,10 @@ This scaffolds a file in `_posts/YYYY-MM-DD-slug.md` with the correct front matt
 layout: post
 title: "Post Title"
 date: YYYY-MM-DD HH:MM:SS +0000
-categories: category-name
+categories: [main-category, sub-category]   # max 2 levels for Chirpy
+tags: [tag1, tag2, tag3]
 ---
 ```
 
-Use `layout: post` for blog entries and `layout: page` for standalone pages.
+Use `layout: post` for blog entries. Chirpy renders `categories` as a breadcrumb (max 2 recommended) and `tags` as clickable taxonomy links. Both must be YAML arrays.
+
