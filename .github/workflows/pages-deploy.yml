@@ -4,6 +4,11 @@ name: "Build and Deploy to GitHub Pages"
 # gh-pages. We build with Bundler and deploy via the GitHub Actions Pages API.
 # actions/configure-pages switches the Pages source to "GitHub Actions" so
 # GitHub's native Jekyll builder no longer runs against the branch.
+#
+# NOTE: GitHub Actions does not trigger workflows from pushes made with
+# GITHUB_TOKEN. The workflow_run trigger ensures this workflow fires after
+# the sync workflow completes, even though that sync push won't trigger it
+# directly.
 on:
   push:
     branches:
@@ -13,6 +18,12 @@ on:
       - README.md
       - LICENSE
       - AGENTS.md
+  workflow_run:
+    workflows: ["Sync pages-deploy workflow to gh-pages"]
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:

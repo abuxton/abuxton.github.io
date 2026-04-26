@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -39,3 +40,11 @@ jobs:
           git diff-index --quiet HEAD -- || \
             git commit -m "fix: sync corrected pages-deploy workflow from main"
           git push origin gh-pages
+
+      - name: Trigger pages-deploy workflow
+        # Pushes from GITHUB_TOKEN do not trigger other workflows, so we
+        # explicitly dispatch pages-deploy.yml after syncing to gh-pages.
+        run: |
+          gh workflow run "Build and Deploy to GitHub Pages" --ref gh-pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
