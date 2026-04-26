@@ -1,0 +1,1 @@
+# Disables GitHub Pages native Jekyll builder; the custom pages-deploy.yml workflow handles building and deployment.
