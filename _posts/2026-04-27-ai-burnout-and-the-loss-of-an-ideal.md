@@ -12,13 +12,13 @@ The short version: Ky is a design engineer who quit their job. Not because it wa
 
 Ky handed in their resignation. They are, as they put it, "without a job. Recovering from burnout."
 
-I agree with this post. Fully. Let me explain why.
-
+I find my self feeling for them, and in total agreement with them. Looking around the `Technodome` I honestly don't believe I'm alone.  
+ 
 ## The Code Review Insight
 
-The most important line in Ky's post is this:
+One of the most important line in Ky's post is this:
 
-> The point of a code review is not simply for good code to make it into a codebase, but to build institutional knowledge as people debate and iterate and compromise, slow as it may be.
+> The point of a code review is not simply for good code to make it into a codebase, but to build institutional knowledge as people debate and iterate and compromise, slow as it may be ( You know my feelings on Shadow Engineering, this is it) 
 
 I want to dwell on this, because it explains a lot of what is being lost that does not show up in any productivity metric.
 
