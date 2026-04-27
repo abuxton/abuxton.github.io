@@ -250,11 +250,11 @@ No cloud credentials are required. The `hashicorp/random` and `hashicorp/time` p
 
 ## The YouTube Series
 
-The [Terraform HCL Enablement YouTube series](https://www.youtube.com/watch?v=HODjaSPQdPQ&list=PL81sUbsFNc5Z93-eRproLp88vI_IxbDBY) is a companion video series that walks through the same concepts covered by the enablement repository. It is intended for engineers who are either new to Terraform or looking to bring more structure and rigour to codebases that have grown organically.
+The [Terraform HCL Enablement YouTube series](https://www.youtube.com/watch?v=HODjaSPQdPQ&list=PL81sUbsFNc5Z93-eRproLp88vI_IxbDBY) is a recent video series that walks through the concepts covered by the enablement repository. It is intended for engineers who are either new to Terraform or looking to bring more structure and rigour to codebases that have grown organically, but it does it at depth and showing you some of teh pain points in your journey to learn and utilize Terraform. 
 
 The series covers the full development journey — from writing your first resource block to structuring modules for reuse and publishing component modules that other teams can consume. It addresses the questions that come up repeatedly in practice: when should you extract a module, how do you decide what belongs in `locals` versus `variables`, how do you test Terraform code, and how do you design modules so they can be governed without being inflexible.
 
-The playlist is structured so that each video builds on the previous one, mirroring the staged approach of the repository. Watching the series alongside working through the code stages is a practical way to build both the conceptual understanding and the hands-on skills.
+The playlist is structured so that each video builds on the previous one. It's an entertaining way to onboard your self to Terraform. 
 
 ## Further Reading
 
