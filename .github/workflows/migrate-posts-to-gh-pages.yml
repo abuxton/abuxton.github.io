@@ -1,16 +1,20 @@
 name: Migrate Posts to gh-pages
 
-# Run this workflow manually from the Actions tab to copy blog posts
-# from the main branch to gh-pages branch.
+# Automatically copies blog posts from main to gh-pages whenever posts are
+# added to main, or when this workflow file itself changes (so a fix here
+# immediately re-triggers migration of any unmigrated posts).
 #
-# Usage:
-#   1. Trigger this workflow manually (Actions > Migrate Posts > Run workflow)
-#   2. Review the changes on gh-pages
-#   3. Merge the PR that removes posts from main
+# Can also be triggered manually from the Actions tab.
 #
 # This resolves issue #14: posts should live on gh-pages, not main.
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - '_posts/**'
+      - '.github/workflows/migrate-posts-to-gh-pages.yml'
   workflow_dispatch:
     inputs:
       source_branch:
@@ -49,14 +53,14 @@ jobs:
 
       - name: List posts on source branch
         run: |
-          echo "Posts on ${{ inputs.source_branch }}:"
-          git show origin/${{ inputs.source_branch }}:_posts/ 2>/dev/null || echo "(no _posts/ directory)"
+          echo "Posts on ${{ inputs.source_branch || 'main' }}:"
+          git show origin/${{ inputs.source_branch || 'main' }}:_posts/ 2>/dev/null || echo "(no _posts/ directory)"
 
       - name: Migrate posts to target branch
         run: |
-          SOURCE="${{ inputs.source_branch }}"
-          TARGET="${{ inputs.target_branch }}"
-          DRY_RUN="${{ inputs.dry_run }}"
+          SOURCE="${{ inputs.source_branch || 'main' }}"
+          TARGET="${{ inputs.target_branch || 'gh-pages' }}"
+          DRY_RUN="${{ inputs.dry_run || 'false' }}"
 
           echo "Migrating posts from '$SOURCE' to '$TARGET'..."
 
