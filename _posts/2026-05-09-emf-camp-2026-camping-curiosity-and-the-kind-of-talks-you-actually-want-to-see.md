@@ -46,7 +46,7 @@ Then there is the performance side: **Electronic Music Open Mic**, **Bytejam and
 
 The real strength of EMF is not just that the topics are broad. It is that the breadth feels coherent.
 
-You can see the connecting thread: practical curiosity. Build something. Measure something. open something up. take something apart. explain a weird niche properly. show your working. let other people have a go. That is a much healthier organising principle than trying to chase whatever the current conference-industrial buzzword happens to be.
+You can see the connecting thread: practical curiosity. Build something. Measure something. Open something up. Take something apart. Explain a weird niche properly. Show your working. Let other people have a go. That is a much healthier organising principle than trying to chase whatever the current conference-industrial buzzword happens to be.
 
 It also means EMF can hold together very different kinds of attendees without flattening them into one stereotype. Hardware people, security people, knitters, radio amateurs, artists, musicians, open-source developers, makers, and people who just want to spend a weekend around thoughtful weirdness all have a plausible route in.
 
