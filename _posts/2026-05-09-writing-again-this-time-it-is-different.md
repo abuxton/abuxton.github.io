@@ -54,7 +54,7 @@ There is an important caveat here, and I do mean important.
 
 I do not want the machine to become my voice. I want it to help me reach my voice more reliably.
 
-That distinction matters. Earlier this year I wrote about an experiment where a post produced by an agent was technically good but did not really sound like me. It was too neat. Too polished. Too obviously machine-shaped. That is still the risk, and it is one worth watching for. The value here is not in producing generic text quickly. It is in reducing the friction enough that I can stay involved all the way through and keep the piece mine.
+That distinction matters. Earlier this year I wrote about an experiment in [Refactoring Agent Workflows](https://blog.abcdevelopment.co.uk/development/agents/2026/03/09/refactoring-agent-workflows.html), where a post produced by an agent was technically good but did not really sound like me. It was too neat. Too polished. Too obviously machine-shaped. That is still the risk, and it is one worth watching for. The value here is not in producing generic text quickly. It is in reducing the friction enough that I can stay involved all the way through and keep the piece mine.
 
 So this is not really a post about AI hype, and it is not especially about tech news either. It is a post about what it feels like when a tool finally meets you where you are instead of asking you to overcome yourself before you are allowed to use it.
 
