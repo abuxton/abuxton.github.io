@@ -58,6 +58,8 @@ If you want a practical governance layer on top, I think there is a credible opt
 
 This one is less about abstract ethics and more about operational ethics. It makes the agent's process easier to inspect, easier to audit, and easier to reason about in teams.
 
+Maybe this rule translates to **Be transparent, working methodology should be an equal part of the presentation layer of any solution or product.** Oddly, I'm starting to feel this is heavily influenced from a DevOps movement background! 
+
 Benefits:
 
 - Better transparency: reviewers can see where intermediate artefacts came from.
