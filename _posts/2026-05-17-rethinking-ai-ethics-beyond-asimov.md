@@ -49,6 +49,29 @@ If I were appending a practical baseline to an `AGENTS.md` or OpenAI-style instr
 
 These are not "perfect laws." They are operational guard rails. They still need monitoring, testing, incident response, and governance around them.
 
+### Optional fourth rule: keep temporary work in `./tmp`
+
+If you want a practical governance layer on top, I think there is a credible optional fourth rule:
+
+4. **Create temporary files and working artefacts only in the repository `./tmp` folder, never system-level `/tmp` or hidden central locations.**
+   Keep transient work visible, reviewable, and scoped to the workspace.
+
+This one is less about abstract ethics and more about operational ethics. It makes the agent's process easier to inspect, easier to audit, and easier to reason about in teams.
+
+Benefits:
+
+- Better transparency: reviewers can see where intermediate artefacts came from.
+- Better governance: workflow remains inside the repo boundary and team conventions.
+- Better reproducibility: another person can inspect or replay the same working trail.
+
+Trade-offs:
+
+- Potential clutter if `./tmp` hygiene is poor.
+- Possible confusion if people mistake temporary artefacts for source-of-truth files.
+- Slight friction for tools that assume system temp directories by default.
+
+As with the first three rules, this is not magic. It is a design choice that improves accountability when enforced consistently.
+
 ## The bit we should stop pretending about
 
 AI ethics is not mainly a wording exercise. It is an implementation exercise under pressure.
