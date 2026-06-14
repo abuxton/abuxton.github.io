@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using HashiCorp Packer to Build a Private Docker Registry"
-date: 2026-06-14 19:30:00 +0000
+date: 2026-06-14 19:00:00 +0000
 categories: [development, docker, terraform]
 tags: [packer, hashicorp, docker-registry, private-registry, terraform, aws, infrastructure]
 ---
