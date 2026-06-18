@@ -96,7 +96,7 @@ This is the kind of architecture that has real depth you can explore outside the
 - [Envoy Proxy](https://www.envoyproxy.io/) — the data plane at the heart of this platform
 - [xDS API Protocol](https://www.envoyproxy.io/docs/envoy/latest/api-docs/xds_protocol) — the dynamic configuration protocol that makes the whole thing viable
 - [Open Service Broker API specification](https://www.openservicebrokerapi.org/) — the provisioning interface standard the broker implements
-- [Sovereign on Bitbucket](https://bitbucket.org/) — the speaker's open-sourced xDS control plane (search for "Sovereign" — they mention it is public at time of recording)
+- [Sovereign on Bitbucket](https://bitbucket.org/repo/all?name=sovereign) — the speaker's open-sourced xDS control plane (search for "Sovereign" — they mention it is public at time of recording)
 - [FastAPI](https://fastapi.tiangolo.com/) — the Python framework both the broker and Sovereign are built in
 - [HashiCorp Packer](https://www.packer.io/) — the AMI build pipeline tooling
 - [SaltStack](https://saltproject.io/) — the configuration management layer inside the AMI build
