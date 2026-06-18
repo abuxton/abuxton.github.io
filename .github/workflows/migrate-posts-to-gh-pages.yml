@@ -110,9 +110,9 @@ jobs:
           fi
 
           git add _posts/
-          git commit -m "feat(posts): migrate $ADDED post(s) from '$SOURCE' to '$TARGET'
-
-Migrated via workflow: migrate-posts-to-gh-pages
-Resolves: #14"
+          git commit \
+            -m "feat(posts): migrate $ADDED post(s) from '$SOURCE' to '$TARGET'" \
+            -m "Migrated via workflow: migrate-posts-to-gh-pages" \
+            -m "Resolves: #14"
           git push origin "$TARGET"
           echo "Successfully pushed $ADDED new post(s) to '$TARGET'."
