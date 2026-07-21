@@ -6,7 +6,8 @@ categories: [ai, development]
 tags: [waza, evals, ai-agents, skills, promptfoo, deepeval, inspect-ai, openai-evals, evaluation]
 ---
 
-Issue [#54](https://github.com/abuxton/abuxton.github.io/issues/54) on this blog asked me to review and summarize [Microsoft's Waza](https://microsoft.github.io/waza/) and compare it to whatever else exists for evaluating AI agents and skills. That request landed at a good moment. I have been quietly building [abuxton/Skills](https://github.com/abuxton/Skills) — a collection of `SKILL.md` files for coding agents, published via npm — and I have never had a satisfying answer to the question "how do I know these skills still work after I change the wording, swap models, or bump a dependency?" So this is as much me checking my own homework as it is a product review.
+
+ I thought it interesting to take a look at [Microsoft's Waza](https://microsoft.github.io/waza/) and compare it to whatever else exists for evaluating AI agents and skills. That request landed at a good moment. I have been quietly building [abuxton/Skills](https://github.com/abuxton/Skills) — a collection of `SKILL.md` files for coding agents, published via npm — and I have never had a satisfying answer to the question "how do I know these skills still work after I change the wording, swap models, or bump a dependency?" So this is as much me checking my own homework as it is a product review.
 
 ## What Is Waza?
 
