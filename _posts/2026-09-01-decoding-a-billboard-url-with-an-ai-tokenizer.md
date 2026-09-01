@@ -52,6 +52,35 @@ So the address on the billboard is:
 https://listenlabs.ai/puzzle
 ```
 
+## Explain it like I am five
+
+Imagine a giant book where little pieces of text are given number labels. The
+book might have entries for parts of words, whole words, dots, or slashes.
+Instead of writing the text on the billboard, someone wrote the labels:
+
+```text
+64659, 123310, 75584, 8138, 38271
+```
+
+Those labels look like nonsense unless you have the same giant book. The
+`o200k_base` tokenizer is that book. When it looks up the five labels in order,
+it puts the text pieces back together:
+
+```text
+listenlabs.ai/puzzle
+```
+
+Adding `https://` is like writing the beginning of an address on an envelope:
+
+```text
+https://listenlabs.ai/puzzle
+```
+
+So this was a secret web address written in an AI's word-and-number dictionary,
+not ordinary encryption. The exact pieces are chosen by the tokenizer and do
+not have to line up neatly with whole words; it is the complete sequence that
+spells the address.
+
 ## Why `o200k_base`?
 
 There is no reliable mathematical test that identifies `o200k_base` from those
