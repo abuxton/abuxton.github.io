@@ -77,19 +77,23 @@ Imagine a giant book where every tiny piece of text has a number.
 
 For example, the book might say:
 
-• number  64659  means  "listen" 
-• another number means  "labs" 
-• another means  ".ai" 
-• another means  "/" 
-• another means  "puzzle" 
+- number  64659  means  "listen"
+- another number means  "labs"
+- another means  ".ai"
+- another means  "/"
+- another means  "puzzle" 
 
 The billboard showed only the numbers:
 
+```text
 64659, 123310, 75584, 8138, 38271
+```
 
-They look meaningless until you use the same giant book—called the  o200k_base  tokenizer—to look each number up. It turns the number pieces back into text:
+They look meaningless until you use the same giant book—called the  `o200k_base`  tokenizer—to look each number up. It turns the number pieces back into text:
 
+```text
 listenlabs.ai/puzzle
+```
 
 Then we add  https://  at the front, like putting an address on an envelope:
 
@@ -110,8 +114,6 @@ https://listenlabs.ai/puzzle
 So the solution is not a secret-number trick: it is the right lookup book for
 an AI's word-and-number dictionary. The exact pieces do not have to be whole
 words; together, they spell the address to the challenge. 
-Effectively, we cheated and used an abstraction of every possible Agnetic tokeniser to get a sane answer and test.
-If you are bored, try printing out every answer and test them... 
 
 ## Why `o200k_base`?
 
@@ -130,6 +132,9 @@ confirm.
 This is closer to looking up words in the right dictionary than cracking a
 secret code. The difficult part is recognising which dictionary the puzzle
 expects.
+
+> Effectively, we cheated and used an abstraction of every possible Agnetic tokeniser to get a sane answer and test.
+If you are bored, try printing out every answer and test them... 
 
 ## Reproducing the decode
 
