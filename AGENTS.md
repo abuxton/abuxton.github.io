@@ -1,311 +1,235 @@
-# AGENTS — Agent-Agnostic Workflow Guide
+# Agent Workflow Guide for abuxton.github.io
 
-This guide explains how to work with this Ruby/Jekyll blog project using OpenSpec, an artifact-driven workflow system. Use this regardless of which agent interface you're using (GitHub Copilot, OpenCode, Claude, or any other agent).
+This is a Jekyll-based personal blog hosted on GitHub Pages at `blog.abcdevelopment.co.uk`. This guide explains how to work with agents on this project using a simple **Plan → Tasks → Implementation** workflow. Use this regardless of which agent interface you're using (GitHub Copilot, Claude, OpenCode, or any other agent).
 
 ## Project Context
 
-**Repository:** `abuxton/abuxton.github.io`
-**Published at:** [http://blog.abcdevelopment.co.uk](http://blog.abcdevelopment.co.uk)
-**Technology:** Ruby, Jekyll, GitHub Pages
-**Blog branch:** `gh-pages` — all published content lives here
-**Development branch:** `main` — source, Makefiles, Jekyll configuration
+**Technology Stack:**
+- Jekyll static site generator
+- Chirpy theme (`cotes2020/jekyll-theme-chirpy` v7.x)
+- GitHub Pages hosting, built and deployed by GitHub Actions
+- Ruby 3.3.7 (pinned in `.ruby-version`)
+- Makefile-based task automation
 
-This is a Jekyll-based static blog. New blog posts are Markdown files placed in `_posts/` on the `gh-pages` branch following Jekyll naming convention: `YYYY-MM-DD-title-slug.md`.
-
-### Quick Reference: Common Tasks
-
-| Task | Command |
-|------|---------|
-| Serve locally | `make jekyll-serve` |
-| Build site | `make jekyll-build` |
-| New post | `make new-post title="My Title"` |
-| Deploy to gh-pages | `make deploy-gh-pages` |
-| Install dependencies | `make bundle-install` |
-
----
-
-## Overview
-
-Agents are expected to be used for a variety of projects and we would like to establish a standardised approach utilising a mix of agent skills and Spec driven deployment in any development environment setup. Work is organized using **OpenSpec**, an artifact-driven workflow that structures development into well-defined phases:
-
-1. **Proposal** — What you want to build and why
-2. **Specs** — Technical requirements and acceptance criteria
-3. **Design** — Architecture and implementation approach
-4. **Tasks** — Concrete, actionable work items
-5. **Implementation** — Code changes and deployment
-
-This structure enables methodical progression from planning through completion.
-
-### What Makes This Repository Agent-Aware?
-
-- **Unified agent resources:** All skills, commands, prompts, and configuration in `~/.agents/`
-- **Local development:** During development, resources are in `.agents/` within project
-- **Deployable structure:** Copy entire `.agents/` directory to `~/.agents/` for system-wide access
-- **Multiple agent types:** Supports Claude, Copilot, OpenCode, and custom integrations
-- **Idempotent operations:** Safe for both autonomous and human decision-making
-- **Clear phase documentation:** Bootstrap, setup, validation, optional features
-- **Artifact-driven workflow:** OpenSpec structures complex changes consistently
-
-### Key Concepts
-
-- **Change**: A unit of work (feature, fix, refactor) organized in `openspec/changes/<change-name>/`
-- **Artifact**: Structured documents that guide implementation (proposal, specs, design, tasks)
-- **Schema**: A workflow template that defines which artifacts are needed and their sequence
-- **Skills**: Agent-specific instructions for performing OpenSpec operations
-
----
-
-## Jekyll Blog Conventions
-
-### Writing a New Blog Post
-
-Blog posts live in `_posts/` on the `gh-pages` branch and follow this naming convention:
-
-```
-_posts/YYYY-MM-DD-my-post-title.md
+**Key Commands:**
+```bash
+make                           # Show all available targets
+make bundle-install           # Install Ruby gems
+make jekyll-build             # Build static site
+make jekyll-serve             # Serve locally with livereload
+make jekyll-serve JEKYLL_OPTS="--drafts"  # Include draft posts
+make jekyll-clean             # Clean build
+make new-post title="Title"   # Create new post
+make new-post title="Title" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"
 ```
 
-Every post requires front matter at the top:
+**Project Structure:**
+- `_config.yml` — Site configuration (title, baseurl, theme, plugins)
+- `_posts/` — Blog posts with Jekyll front matter
+- `_tabs/` — Chirpy navigation tabs
+- `.github/workflows/pages-deploy.yml` — Builds and deploys the site with
+  GitHub Actions
+- `common/` — Shared Makefile utilities (not site content)
+- `CNAME` — Custom domain configuration
+
+## Branch and Deployment Model
+
+`gh-pages` is the source branch for this site, not a generated-output branch.
+The GitHub Actions Pages workflow checks out `gh-pages`, builds the Chirpy
+site with Bundler, and deploys the resulting `_site` artifact through the
+GitHub Pages API.
+
+- Start blog-content and site changes from an up-to-date `gh-pages` branch.
+- Open pull requests for those changes against `gh-pages`, including from
+  feature branches forked from it.
+- Do not manually copy `_site` output to a branch or use a direct
+  `deploy-gh-pages` target; the workflow deploys after changes reach
+  `gh-pages`.
+- Keep `.github/workflows/pages-deploy.yml` on `gh-pages`, because that is
+  the source checked out by the deployment workflow.
+
+The shared AI-agent environment is synchronized automatically between `main`
+and `gh-pages` by `.github/workflows/sync-agent-environment.yml`. Its managed
+files are `AGENTS.md`, `.github/copilot-instructions.md`, and
+`skills-lock.json`. Update the shared files on either branch; do not manually
+copy them between branches.
+
+## Workflow Approach
+
+Work on this project follows a simple **Plan → Tasks → Implementation** pattern:
+
+1. **Plan** — Clarify what you're building, why, and acceptance criteria
+2. **Tasks** — Break work into concrete, actionable items
+3. **Implementation** — Execute tasks and make code changes
+4. **Validation** — Verify work is complete and correct
+5. **Integration** — Commit and deploy via Git/GitHub Pages
+
+This approach is lightweight, practical, and integrates seamlessly with Jekyll and Git workflows.
+
+## Creating Blog Posts
+
+Create posts with the Makefile so the filename and required front matter are
+consistent:
+
+```bash
+# A post written without an AI co-author
+make new-post title="My Post Title" slug="my-post-slug"
+
+# A post co-authored with an AI agent
+make new-post title="My Post Title" \
+  agent="GitHub Copilot" \
+  agent_url="https://github.com/features/copilot"
+```
+
+For every post co-authored by an AI agent, pass both `agent` and `agent_url`.
+The scaffold adds a visible `🤖` attribution block below the front matter.
+Keep that block in the published post, name the agent accurately, and point
+to an authoritative agent or provider URL. Do not add the block to posts that
+were not co-authored by an AI agent.
+
+Use this form if an existing AI-assisted post needs an attribution added:
+
+```markdown
+> 🤖 **AI co-author:** [Agent name](https://authoritative-agent-or-provider-url.example)
+```
+
+Follow the post front matter convention:
 
 ```yaml
 ---
 layout: post
-title: "My Post Title"
+title: "Post Title"
 date: YYYY-MM-DD HH:MM:SS +0000
-categories: [category1, category2]
-tags: [tag1, tag2]
+categories: [main-category, sub-category]
+tags: [tag1, tag2, tag3]
 ---
 ```
 
-Use `make new-post title="My Post Title"` to scaffold a new post file.
-
-### Categories Used
-
-- `update` — general site/project updates
-- `development` — software development topics
-- `github` — GitHub-specific topics
-- `ai` — AI tools and skills
-- `ruby` — Ruby and Jekyll topics
-
-### Content Style
-
-- Write in clear, conversational Markdown
-- Use headings (`##`, `###`) to structure longer posts
-- Include code blocks with language hints (` ```ruby `, ` ```bash `, etc.)
-- Keep posts focused on a single topic
-- Reference related posts and projects where relevant
-
----
+Use a maximum of two category levels for Chirpy. Both `categories` and
+`tags` must be YAML arrays.
 
 ## Available Skills
 
-All skills are available in a unified location. The path depends on your context:
+This repository includes specialized skills for various tasks. Skills are available in `.agents/skills/` during development and can be deployed to `~/.agents/skills/` for system-wide access.
 
-**Development (in project):**
-- **Location:** `./.agents/skills/`
-- **Commands:** `./.agents/commands/`
-- **Prompts:** `./.agents/prompts/`
-- **Configuration:** `./.agents/settings.json`
+### 💬 Content & Documentation Skills
 
-**Deployed (system-wide):**
-- **Location:** `~/.agents/skills/`
-- **Commands:** `~/.agents/commands/`
-- **Prompts:** `~/.agents/prompts/`
-- **Configuration:** `~/.agents/settings.json`
+#### `brainstorming`
+Expand seeds and escape convergent ideation. Use when you have the start of an idea and want to grow it, when brainstorming produces the same ideas every time, or when you need to explore possibility space.
 
-Access available skills:
-
-```bash
-# During development (in project)
-ls ./.agents/skills/
-
-# After deployment to home directory
-ls ~/.agents/skills/
-```
-
-### 🎯 Key Skills for this Project
-
-#### `jekyll-blog`
-**Jekyll blog post creation, site management, and content workflow**
-
-Use when: Writing new posts, managing categories/tags, configuring Jekyll, deploying to gh-pages
-
-#### `writing-clearly-and-concisely`
-**Expert guidance for clear, engaging technical writing**
-
-Use when: Drafting or editing blog posts, improving readability
+#### `doc-coauthoring`
+Guide users through a structured workflow for co-authoring documentation. Use when writing documentation, proposals, technical specs, decision docs, or similar structured content.
 
 #### `markdown-documentation`
-**Markdown best practices for structured documentation and blog content**
+Master markdown formatting, GitHub Flavored Markdown, README files, and documentation formatting. Use when writing markdown docs, READMEs, or formatting documentation.
 
-Use when: Formatting posts, creating tables, code blocks, and rich content
+#### `outline-coach`
+Act as an assistive outline coach who guides structural development through questions. Use when developing your own outline through diagnosis and frameworks.
 
-#### `user-story-writing`
-**Transform ideas into structured stories**
+#### `outline-collaborator`
+Act as an active outline partner who develops structure collaboratively. Use when developing, iterating, or improving story outlines, generating scene beats and character arcs.
 
-Use when: Planning blog post series, structuring tutorial content
+#### `summarization`
+Create effective summaries by matching summarization type to purpose, audience, and context. Use when asked to summarize, create TLDR, condense content, or create executive summaries.
+
+#### `writing-clearly-and-concisely`
+Use when writing prose humans will read—documentation, commit messages, error messages, explanations, reports, or UI text. Applies timeless rules for clearer, stronger, more professional writing.
+
+### 📊 Document Generation Skills
+
+#### `docx`
+Create, read, edit, or manipulate Word documents (.docx files). Use when producing professional documents with formatting like tables of contents, headings, page numbers, or letterheads.
+
+#### `pdf`
+Read or extract text/tables from PDFs, combine or merge multiple PDFs, split PDFs, add watermarks, create new PDFs, fill PDF forms, encrypt/decrypt, extract images, or perform OCR on scanned PDFs.
+
+#### `pptx`
+Create slide decks, pitch decks, or presentations; read, parse, or extract text from .pptx files; edit or modify existing presentations; combine or split slide files; work with templates, layouts, speaker notes.
+
+#### `revealjs-presenter`
+Generate RevealJS HTML presentations with reliable layout, professional typography, and effective visual communication. Use when creating slide decks, pitch presentations, or technical talks.
+
+#### `frontend-slides`
+Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when building a presentation or converting PPT/PPTX to web.
+
+#### `xlsx`
+Open, read, edit, or fix existing .xlsx, .xlsm, .csv, or .tsv files; create new spreadsheets from scratch; convert between tabular file formats. Use when the spreadsheet is the primary input or output.
+
+### 🛠️ Workflow & Process Skills
 
 #### `git-workflow`
-**Expert patterns for Git: branching, commits, collaboration**
+Expert patterns for Git version control: branching strategies (Git Flow, GitHub Flow, Trunk-based), Conventional Commits, pull requests, merge conflicts, CI/CD integration, and advanced operations (rebase, cherry-pick, bisect).
 
-Use when: Working with gh-pages branch, creating PRs, managing releases
+**Quick Reference:**
+- Use `feature/description` for features, `fix/description` for fixes, `release/1.0.0` for releases
+- Conventional Commits format: `<type>[scope]: <description>` (types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`)
+- Merge PRs with: `git add -p` → `git commit -m "..."` → `git push` → `gh pr create` → `gh pr merge --squash`
 
-#### `github-actions-creator`
-**Create and manage GitHub Actions workflows**
+#### `skill-creator`
+Create new skills, modify and improve existing skills, and measure skill performance. Use when wanting to create a skill from scratch, edit an existing skill, or optimize a skill's description.
 
-Use when: Automating Jekyll builds, CI/CD for the blog
+#### `skill-integrator`
+Integrate installed skill usage guidance into project documentation. Use when skills are installed but agents don't know when to use them, or when updating guidance after adding skills.
 
----
+#### `user-story-writing`
+Write effective user stories that capture requirements from the user's perspective. Create clear stories with detailed acceptance criteria to guide development.
 
-## OpenSpec Skills (Primary Workflow)
+#### `technology-impact`
+Systematically analyze societal impacts of technologies using McLuhan's Tetrad of Media Effects. Use when evaluating new technology, planning technology adoption, or analyzing technology policy.
 
-All skills follow the same conceptual pattern:
+### 🚀 Quick Reference
 
-### 🎯 Primary Skills
+**Typical Workflow:**
+1. **Clarify** — What are you building? Use `brainstorming` if uncertain
+2. **Plan** — Create a task list for implementation
+3. **Implement** — Make changes, use `git-workflow` for commits
+4. **Document** — Write markdown (use `markdown-documentation`) or create slides (use `pptx` or `revealjs-presenter`)
+5. **Validate** — Run `make jekyll-build` to validate the generated site
+6. **Commit** — Use Conventional Commits with `git-workflow`, then merge into
+   `gh-pages` to deploy
 
-#### `openspec-new-change`
-**Start a new change with the artifact-driven workflow**
+**Examples:**
+- **New blog post:** `make new-post title="My Post"` → Write markdown → `make jekyll-build` → Commit → Merge into `gh-pages`
+- **AI-co-authored post:** `make new-post title="My Post" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"` → Keep the generated attribution → Write markdown → `make jekyll-build`
+- **Site documentation:** Use `doc-coauthoring` to plan → `markdown-documentation` to write → Commit
+- **Presentation:** Use `pptx` or `revealjs-presenter` to create → Export → Deploy
 
-Use when: Creating a new feature, fix, or significant modification
+## Important: Temporary Working Directory
 
-Flow:
-1. Optionally provide a change name (kebab-case) or describe what you want to build
-2. System infers the schema (defaults to spec-driven)
-3. Agent creates scaffolding at `openspec/changes/<name>/`
-4. Agent shows first artifact template and stops for your input
+### ⚠️ CRITICAL: Use `./tmp` for ALL temporary files, NEVER `/tmp`
 
-#### `openspec-apply-change`
-**Implement tasks from an existing change**
+**This is a mandatory requirement for all agent workflows. ALWAYS follow this rule:**
 
-Use when: You have an active change and need to implement the work
-
-#### `openspec-continue-change`
-**Create the next artifact in a change**
-
-Use when: Current artifact(s) complete but design incomplete
-
-#### `openspec-explore`
-**Think through ideas before or during a change**
-
-Use when: You need to explore/investigate before committing to a design
-
-#### `openspec-verify-change`
-**Validate implementation matches artifacts**
-
-Use when: Want to ensure implementation is complete and coherent before archiving
-
----
-
-## Ruby & Jekyll Development Standards
-
-### Core Principles
-
-- Use `bundle exec` prefix for all Jekyll/gem commands
-- Pin Ruby version via `.ruby-version`
-- Keep `Gemfile` locked (`Gemfile.lock`)
-- Follow Jekyll conventions for front matter, layouts, and includes
-
-### Project Structure
-
-```
-.
-├── _posts/                   # Blog posts (YYYY-MM-DD-title.md)
-├── _layouts/                 # Page templates
-├── _includes/                # Reusable components
-├── _site/                    # Built site (git-ignored, generated)
-├── assets/                   # CSS, JS, images
-├── common/bin/
-│   ├── ruby.mk              # Ruby/Bundler Makefile helpers
-│   └── jekyll.mk            # Jekyll/gh-pages Makefile helpers
-├── .agents/                  # Agent skills and workflow resources
-├── Gemfile                   # Ruby dependencies
-├── _config.yml               # Jekyll configuration
-├── .ruby-version             # Ruby version pinning
-├── AGENTS.md                 # This file — agent workflow guide
-└── README.md                 # Project overview
-```
-
-### Git Workflow
-
-This project uses a two-branch model:
-- **`main`** — Development: source files, Makefiles, configuration, agent resources
-- **`gh-pages`** — Published: Jekyll-built HTML deployed to GitHub Pages
-
-Blog posts are written on `gh-pages` (or a feature branch off it) and deployed via `make deploy-gh-pages`.
-
-#### Quick Reference: Branch Workflow for Blog Posts
-
+**DO THIS:**
 ```bash
-# Start from gh-pages
-git checkout gh-pages && git pull
-git checkout -b post/my-new-post-title
-
-# Create the post
-make new-post title="My New Post Title"
-# Edit _posts/YYYY-MM-DD-my-new-post-title.md
-
-# Preview locally
-make jekyll-serve
-
-# Commit and deploy
-git add _posts/
-git commit -m "feat(post): add 'My New Post Title'"
-git checkout gh-pages
-git merge post/my-new-post-title
-make deploy-gh-pages
+# Create working files in project-local ./tmp directory
+echo "data" > ./tmp/workfile.txt
+./some-script.sh > ./tmp/output.log
+cp large_file.bin ./tmp/backup.bin
 ```
 
-#### Conventional Commits for Blog
-
-```
-feat(post): add new blog post on <topic>
-fix(post): correct typo in <post-slug>
-style(site): update CSS for <element>
-chore(deps): bump jekyll to <version>
-docs(readme): update project overview
-```
-
----
-
-## Extended Skills Reference
-
-### `git-workflow` 🔗 Git Workflow Skill
-
-**Expert patterns for Git version control: branching, commits, collaboration, and CI/CD.**
-
-#### Quick Reference: Branch Naming
+**NEVER DO THIS:**
 ```bash
-post/YYYY-MM-DD-post-title     # New blog posts
-fix/post-slug-correction       # Post fixes
-feature/site-feature-name      # Site features
-release/1.2.0                  # Release branches
+# WRONG - never use system /tmp
+echo "data" > /tmp/workfile.txt        # ❌ INCORRECT
+cd /tmp && ./script.sh                  # ❌ INCORRECT
+cp data /tmp/backup.txt                 # ❌ INCORRECT
 ```
 
----
+**Why this is mandatory:**
+- ✅ All working files stay local to the repository
+- ✅ Easier cleanup and resetting of agent state
+- ✅ Better isolation between concurrent processes
+- ✅ No pollution of system directories
+- ✅ Files persist for debugging and review
+- ✅ Portable across different machines and environments
 
-## Directory Reference
+**Key Points:**
+- The `.gitignore` file already excludes `./tmp/`
+- Agents creating intermediate files MUST use `./tmp`
+- Scripts and commands MUST write working output to `./tmp`
+- When creating a `./tmp` file, verify it doesn't exist first
+- Always reference `./tmp` relative to the project root
+- Delete contents of `./tmp` only when explicitly requested by user
 
-**Agent Resources (Deployed):**
-- `~/.agents/skills/` — All OpenSpec and domain-specific skills
-- `~/.agents/commands/` — CLI command definitions
-- `~/.agents/prompts/` — Prompt templates for agent workflows
-- `~/.agents/settings.json` — Agent configuration and integration settings
-
-**Agent Resources (Development):**
-- `.agents/skills/` — All OpenSpec and domain-specific skills
-- `.agents/commands/` — CLI command definitions
-- `.agents/prompts/` — Prompt templates for agent workflows
-- `.agents/settings.json` — Agent configuration and integration settings
-
-**Project Configuration:**
-- `openspec/config.yaml` — Schema and project context
-- `openspec/changes/` — Active and archived changes
-- `openspec/specs/` — Specification files for the project
-
-**Deployment:**
-- Copy entire `.agents/` directory from project to `~/.agents/` for system-wide home-based access
-- Agents automatically locate resources in `~/.agents/` on any system
-
----
-
-**Last Updated:** 2026-02-27
+This rule is non-negotiable and applies to every task.

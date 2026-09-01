@@ -1,94 +1,95 @@
-# Copilot Instructions for abuxton.github.io
-
-**PRIMARY RESOURCE:** Before consulting this file, refer to `AGENTS.md` in the root of this repository for the authoritative workflow and skill reference.
-
-This document provides GitHub Copilot guidance for working on this Ruby/Jekyll blog project.
-
----
+# Copilot Instructions
 
 ## Project Overview
 
-This is a Jekyll-based blog published at [http://blog.abcdevelopment.co.uk](http://blog.abcdevelopment.co.uk).
+This is a Jekyll-based personal blog hosted on GitHub Pages at `blog.abcdevelopment.co.uk`. It uses the **Chirpy** theme (`cotes2020/jekyll-theme-chirpy` v7.x) and is deployed via GitHub Actions (`/.github/workflows/pages-deploy.yml`) — not via the `github-pages` gem, because Chirpy is not on the GitHub Pages safe-list.
 
-- **Language:** Ruby
-- **Framework:** Jekyll (static site generator)
-- **Hosting:** GitHub Pages
-- **Blog branch:** `gh-pages` — published content
-- **Dev branch:** `main` — source, configuration, agent resources
+The project is structured with a Makefile for task automation, and Ruby gems are managed via Bundler. Blog content lives in `_posts/`, navigation tabs in `_tabs/`.
 
----
+## Instructions
 
-## Key References
+- Defer to [`./AGENTS.md`](../AGENTS.md) as the authoritative repository
+  guidance for project workflows, post creation, branch usage, and validation.
+  Follow these instructions as a concise supplement; when they conflict,
+  `AGENTS.md` takes precedence.
+- For any code changes, follow the **Plan → Tasks → Implementation** workflow outlined in `AGENTS.md`.
+- Use the Makefile for all build, serve, and maintenance tasks. Refer to `AGENTS.md` for available commands and their usage.
+- When creating new posts, use the `make new-post` target to scaffold the file with correct front matter.
+- For AI-co-authored posts, pass both `agent` and `agent_url` to `make new-post`
+  so the required visible `🤖` AI co-author attribution is scaffolded.
+- Adhere to the post front matter convention below for consistency across blog entries.
+- Treat `gh-pages` as the site source branch. Create content branches from it
+  and target it with pull requests; GitHub Actions builds and deploys the
+  site after merge.
 
-- **[AGENTS.md](../AGENTS.md)** — Primary agent workflow guide, Jekyll conventions, OpenSpec skills
-- **[README.md](../README.md)** — Project setup and common tasks
-- **[.agents/skills/](../.agents/skills/)** — Available agent skills (jekyll-blog, git-workflow, writing, etc.)
-- **[.agents/prompts/](../.agents/prompts/)** — OpenSpec workflow prompts
+## Build & Serve Commands
 
----
+All common tasks are managed via `make`. Run `make` (or `make help`) to see all available targets.
 
-## When Working on This Project
+```sh
+# Install Ruby gems
+make bundle-install
 
-### Blog Posts
+# Build the static site into _site/
+make jekyll-build
 
-1. Posts live in `_posts/` on `gh-pages` branch
-2. Naming convention: `YYYY-MM-DD-title-slug.md`
-3. Always include Jekyll front matter (layout, title, date, categories, tags)
-4. Use `make new-post title="Post Title"` to scaffold
-5. Preview with `make jekyll-serve` before deploying
-6. Deploy with `make deploy-gh-pages`
+# Serve locally with livereload at http://localhost:4000
+make jekyll-serve
 
-### Ruby/Jekyll Standards
+# Pass extra Jekyll flags (e.g. render draft posts)
+make jekyll-serve JEKYLL_OPTS="--drafts"
 
-- Always use `bundle exec` prefix for Ruby/Jekyll commands
-- Keep `Gemfile.lock` committed
-- Follow Jekyll directory conventions (`_posts/`, `_layouts/`, `_includes/`, `assets/`)
-- Use `.ruby-version` for Ruby version pinning
+# Clean the built site
+make jekyll-clean
 
-### Git Conventions
-
-- Conventional commits: `feat(post):`, `fix(post):`, `chore(deps):`, `docs:`
-- Branch naming: `post/YYYY-MM-DD-title` for blog posts, `feature/` for site features
-- PRs target `gh-pages` for content, `main` for site/tooling changes
-
-### Agent Workflow (OpenSpec)
-
-When making significant changes, use the OpenSpec workflow:
-
-```bash
-# Explore an idea
-@workspace Use skill openspec-explore to think through <idea>
-
-# Start a new change
-@workspace Use skill openspec-new-change for <change-description>
-
-# Continue working through artifacts
-@workspace Use skill openspec-continue-change for <change-name>
-
-# Implement the work
-@workspace Use skill openspec-apply-change for <change-name>
+# Print Ruby/Bundler environment info
+make ruby-info
 ```
 
-All OpenSpec commands are in `.agents/commands/opsx/`.
-All prompts are in `.agents/prompts/`.
-All skills are in `.agents/skills/`.
+Always use `bundle exec` (or `make` targets) rather than calling `jekyll` directly — the Makefile handles this automatically via `with_bundle`.
 
+Ruby version is pinned to **3.3.7** in `.ruby-version`. The Makefile auto-detects `rbenv` or `rvm` and activates the correct version.
+
+## Creating New Posts
+
+```sh
+make new-post title="My Post Title"
+# With an explicit slug:
+make new-post title="My Post Title" slug="my-post-slug"
+# With an AI co-author attribution:
+make new-post title="My Post Title" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"
+```
+
+This scaffolds a file in `_posts/YYYY-MM-DD-slug.md` with the correct front matter.
+When `agent` and `agent_url` are supplied, it also adds a visible attribution
+block that must remain in the post.
+
+## Architecture
+
+- `_config.yml` — site-wide settings (title, Chirpy options, plugins, etc.)
+- `_posts/` — blog posts as Markdown with Jekyll front matter
+- `_tabs/` — Chirpy navigation tab pages: `about.md`, `archives.md`, `categories.md`, `tags.md`
+- `404.html` — custom 404 page
+- `CNAME` — sets the custom domain for GitHub Pages
+- `common/` — shared Makefile library (not site content):
+  - `common/mk/core.mk` — entry point; includes the three mk modules below
+  - `common/bin/jekyll.mk` — Jekyll-specific targets
+  - `common/bin/ruby.mk` — Ruby/Bundler helpers and callable `make` functions
+  - `common/bin/git.mk` — Git/GitHub CLI helpers
+- `Makefile` at repo root includes `common/mk/core.mk` to expose all targets
+- `.github/workflows/pages-deploy.yml` — GitHub Actions workflow that builds and deploys the site
+- `skills-lock.json` — locks Claude/agent skill versions; do not edit manually
+
+## Post Front Matter Convention
+
+```yaml
 ---
-
-## Available Skills Summary
-
-| Skill | Purpose |
-|-------|---------|
-| `jekyll-blog` | Jekyll post creation, site management, gh-pages deployment |
-| `writing-clearly-and-concisely` | Clear, engaging technical writing |
-| `markdown-documentation` | Markdown formatting best practices |
-| `user-story-writing` | Structured story/content planning |
-| `git-workflow` | Git branching, commits, PRs |
-| `github-actions-creator` | CI/CD automation workflows |
-| `skill-creator` | Create new agent skills |
-
-See `.agents/skills/` for the complete list.
-
+layout: post
+title: "Post Title"
+date: YYYY-MM-DD HH:MM:SS +0000
+categories: [main-category, sub-category]   # max 2 levels for Chirpy
+tags: [tag1, tag2, tag3]
 ---
+```
 
-**Date:** 2026-02-27
+Use `layout: post` for blog entries. Chirpy renders `categories` as a breadcrumb (max 2 recommended) and `tags` as clickable taxonomy links. Both must be YAML arrays.
