@@ -48,6 +48,12 @@ GitHub Pages API.
 - Keep `.github/workflows/pages-deploy.yml` on `gh-pages`, because that is
   the source checked out by the deployment workflow.
 
+The shared AI-agent environment is synchronized automatically between `main`
+and `gh-pages` by `.github/workflows/sync-agent-environment.yml`. Its managed
+files are `AGENTS.md`, `.github/copilot-instructions.md`, and
+`skills-lock.json`. Update the shared files on either branch; do not manually
+copy them between branches.
+
 ## Workflow Approach
 
 Work on this project follows a simple **Plan → Tasks → Implementation** pattern:
