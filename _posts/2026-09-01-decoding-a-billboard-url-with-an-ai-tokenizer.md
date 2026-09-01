@@ -14,6 +14,11 @@ I saw a photo of an SF billboard with what looked like a broken URL:
 https:// {64659, 123310, 75584, 8138, 38271}
 ```
 
+It led to Listen Labs' [Berghain Challenge](https://berghain.challenges.listenlabs.ai/),
+where you act as a nightclub bouncer and must fill a venue while meeting rules
+about the people admitted. Credit for identifying the tokenizer solution goes
+to [@0x686967](https://x.com/0x686967/status/1962953670703841724).
+
 At first glance it invites the usual decoding guesses. Are the numbers decimal
 character codes? Hex values? Bytes for Base64? An IP address? A hash? None of
 those questions has a convincing answer without an extra rule. The numbers do
@@ -54,9 +59,15 @@ https://listenlabs.ai/puzzle
 
 ## Explain it like I am five
 
-Imagine a giant book where little pieces of text are given number labels. The
-book might have entries for parts of words, whole words, dots, or slashes.
-Instead of writing the text on the billboard, someone wrote the labels:
+First, the challenge is a make-believe nightclub game. You are the person at
+the door. People arrive one at a time, and you must decide whether to let them
+in. You need to fill the club, but also make sure enough guests match the
+rules--for example, enough local people or enough people dressed in black.
+
+The billboard was the signpost to that game, but it hid the web address. Imagine
+a giant book where little pieces of text are given number labels. The book might
+have entries for parts of words, whole words, dots, or slashes. Instead of
+writing the address on the billboard, someone wrote the labels:
 
 ```text
 64659, 123310, 75584, 8138, 38271
@@ -76,10 +87,9 @@ Adding `https://` is like writing the beginning of an address on an envelope:
 https://listenlabs.ai/puzzle
 ```
 
-So this was a secret web address written in an AI's word-and-number dictionary,
-not ordinary encryption. The exact pieces are chosen by the tokenizer and do
-not have to line up neatly with whole words; it is the complete sequence that
-spells the address.
+So the solution is not a secret-number trick: it is the right lookup book for
+an AI's word-and-number dictionary. The exact pieces do not have to be whole
+words; together, they spell the address to the challenge.
 
 ## Why `o200k_base`?
 
