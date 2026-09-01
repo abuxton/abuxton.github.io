@@ -8,10 +8,19 @@ The project is structured with a Makefile for task automation, and Ruby gems are
 
 ## Instructions
 
+- Defer to [`./AGENTS.md`](../AGENTS.md) as the authoritative repository
+  guidance for project workflows, post creation, branch usage, and validation.
+  Follow these instructions as a concise supplement; when they conflict,
+  `AGENTS.md` takes precedence.
 - For any code changes, follow the **Plan → Tasks → Implementation** workflow outlined in `AGENTS.md`.
 - Use the Makefile for all build, serve, and maintenance tasks. Refer to `AGENTS.md` for available commands and their usage.
 - When creating new posts, use the `make new-post` target to scaffold the file with correct front matter.
+- For AI-co-authored posts, pass both `agent` and `agent_url` to `make new-post`
+  so the required visible `🤖` AI co-author attribution is scaffolded.
 - Adhere to the post front matter convention below for consistency across blog entries.
+- Treat `gh-pages` as the site source branch. Create content branches from it
+  and target it with pull requests; GitHub Actions builds and deploys the
+  site after merge.
 
 ## Build & Serve Commands
 
@@ -47,9 +56,13 @@ Ruby version is pinned to **3.3.7** in `.ruby-version`. The Makefile auto-detect
 make new-post title="My Post Title"
 # With an explicit slug:
 make new-post title="My Post Title" slug="my-post-slug"
+# With an AI co-author attribution:
+make new-post title="My Post Title" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"
 ```
 
 This scaffolds a file in `_posts/YYYY-MM-DD-slug.md` with the correct front matter.
+When `agent` and `agent_url` are supplied, it also adds a visible attribution
+block that must remain in the post.
 
 ## Architecture
 
@@ -80,4 +93,3 @@ tags: [tag1, tag2, tag3]
 ```
 
 Use `layout: post` for blog entries. Chirpy renders `categories` as a breadcrumb (max 2 recommended) and `tags` as clickable taxonomy links. Both must be YAML arrays.
-

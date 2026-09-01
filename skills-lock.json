@@ -1,10 +1,28 @@
 {
   "version": 1,
   "skills": {
+    "blog-persona": {
+      "source": "agricidaniel/claude-blog",
+      "sourceType": "github",
+      "skillPath": "skills/blog-persona/SKILL.md",
+      "computedHash": "cc1599d7b250e1482891a3999c4eaf77ec8d3cacbb7ba86d8be0b6f68d6c1ada"
+    },
     "brainstorming": {
       "source": "jwynia/agent-skills",
       "sourceType": "github",
       "computedHash": "cd59bca73ac9878819320f0317ce093928c96ff55d78dcbfab9ce57e27a8a554"
+    },
+    "create-technical-spike": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/create-technical-spike/SKILL.md",
+      "computedHash": "e711706b4aebacac01bcc025e19bcf0e88bf784cbe6419ddf07c2be67c501f33"
+    },
+    "creative-writing-craft": {
+      "source": "haowjy/creative-writing-skills",
+      "sourceType": "github",
+      "skillPath": "skills/creative-writing-craft/SKILL.md",
+      "computedHash": "ba5a479bef04dbfd63b5adc1f4428f21748815c73c09a9e587c92cf86b2ce96d"
     },
     "doc-coauthoring": {
       "source": "anthropics/skills",
@@ -65,6 +83,12 @@
       "source": "jwynia/agent-skills",
       "sourceType": "github",
       "computedHash": "dccae874632a17de19f5e2366eb2fdb5b5f40c56bcd5f5d6c01e569cf9296c93"
+    },
+    "technical-writing": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "pstack/skills/technical-writing/SKILL.md",
+      "computedHash": "0a1bf9d082feaaecc0fe7a808daf3fd03a91e9fad55dd785584b27c7b09420db"
     },
     "technology-impact": {
       "source": "jwynia/agent-skills",

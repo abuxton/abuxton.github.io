@@ -3,7 +3,7 @@
 #   make jekyll-build
 #   make jekyll-serve JEKYLL_OPTS="--drafts"
 #   make new-post title="My Title" slug="my-slug"
-#   make deploy-gh-pages
+#   make new-post title="My Title" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"
 # https://github.com/krisnova/Makefile/blob/main/Makefile
 
 -include .env
@@ -19,11 +19,12 @@ SITE_DIR := _site
 
 # Run a command under bundler if available (use: $(call with_bundle, <cmd>))
 define with_bundle
-if command -v bundle >/dev/null 2>&1; then \
-  bundle exec $(1); \
-else \
-  $(1); \
-fi
+$(call using_ruby, \
+  if command -v bundle >/dev/null 2>&1; then \
+    bundle exec $(1); \
+  else \
+    $(1); \
+  fi)
 endef
 
 # Build site (callable function): $(call jekyll_build_cmd, <extra-args>)
@@ -38,7 +39,7 @@ endef
 
 # Targets --------------------------------------------------------------------
 
-.PHONY: jekyll-build jekyll-serve jekyll-clean jekyll-preview new-post deploy-gh-pages jekyll-info
+.PHONY: jekyll-build jekyll-serve jekyll-clean jekyll-preview new-post jekyll-info
 
 jekyll-build: ## Build site (callable function): $(call jekyll_build_cmd, <extra-args>)
 	@echo "Building Jekyll site..."
@@ -57,10 +58,14 @@ jekyll-preview: ## Preview built site in default browser
 	@open "$(SITE_DIR)/index.html" || true
 
 # Create a new post:
-# make new-post title="My Title" [slug="my-slug"] [layout="post"]
-new-post: ## Create a new post. Usage: make new-post title="My Title" [slug="my-slug"] [layout="post"]
+# make new-post title="My Title" [slug="my-slug"] [layout="post"] [agent="Agent"] [agent_url="https://..."]
+new-post: ## Create a post. AI co-authors require agent and agent_url.
 	@if [ -z "$(title)" ]; then \
-	  echo "Usage: make new-post title=\"My Title\" [slug=\"my-slug\"] [layout=\"post\"]"; \
+	  echo "Usage: make new-post title=\"My Title\" [slug=\"my-slug\"] [layout=\"post\"] [agent=\"Agent\" agent_url=\"https://...\"]"; \
+	  exit 1; \
+	fi
+	@if { [ -n "$(agent)" ] && [ -z "$(agent_url)" ]; } || { [ -z "$(agent)" ] && [ -n "$(agent_url)" ]; }; then \
+	  echo "AI co-authors require both agent and agent_url."; \
 	  exit 1; \
 	fi
 	@layout=$${layout:-post}; \
@@ -71,36 +76,8 @@ new-post: ## Create a new post. Usage: make new-post title="My Title" [slug="my-
 	if [ -e "$$filename" ]; then \
 	  echo "Post exists: $$filename"; \
 	else \
-	  { echo "---"; echo "layout: $$layout"; echo "title: \"$(title)\""; echo "date: $$(date -u +"%Y-%m-%d %H:%M:%S %z")"; echo "categories: blog"; echo "---"; echo ""; } > "$$filename"; \
+	  { echo "---"; echo "layout: $$layout"; echo "title: \"$(title)\""; echo "date: $$(date -u +"%Y-%m-%d %H:%M:%S %z")"; echo "categories: [blog]"; echo "tags: []"; echo "---"; echo ""; if [ -n "$(agent)" ]; then echo "> 🤖 **AI co-author:** [$(agent)]($(agent_url))"; echo ""; fi; } > "$$filename"; \
 	  echo "Created $$filename"; \
-	fi
-
-# Deploy to gh-pages branch. Two modes:
-# - If gh-pages branch exists: use git worktree to replace its contents with _site and push.
-# - If not: create an orphan gh-pages branch from _site and push.
-
-deploy-gh-pages: ## Deploy built site to gh-pages branch
-	jekyll-build
-	@echo "Deploying to gh-pages..."
-	@set -e; \
-	if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "Not a git repository"; exit 1; fi; \
-	if git show-ref --verify --quiet refs/heads/gh-pages; then \
-	  tmpdir=$$(mktemp -d); \
-	  git worktree add --checkout --force "$$tmpdir" gh-pages; \
-	  rsync -a --delete "$(SITE_DIR)/" "$$tmpdir"/; \
-	  cd "$$tmpdir"; \
-	  git add -A; \
-	  if git diff --cached --quiet; then echo "No changes to deploy"; else git commit -m "Site rebuild: $$(date -u +'%Y-%m-%d %H:%M:%S UTC')"; git push origin gh-pages; fi; \
-	  cd - >/dev/null; \
-	  git worktree remove "$$tmpdir" >/dev/null 2>&1 || rm -rf "$$tmpdir"; \
-	else \
-	  echo "gh-pages branch does not exist: creating orphan branch and pushing"; \
-	  git checkout --orphan gh-pages; \
-	  git --work-tree="$(SITE_DIR)" add --all; \
-	  git --work-tree="$(SITE_DIR)" commit -m "Initial gh-pages commit"; \
-	  git push origin gh-pages; \
-	  git checkout -f -; \
-	  git branch -D gh-pages || true; \
 	fi
 
 jekyll-info: ## Show Jekyll environment info
