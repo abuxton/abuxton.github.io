@@ -40,6 +40,8 @@ The useful property is not “the agent is trusted.” It is “this task does n
 
 The Missing Semester package-management chapter is a good reminder that package managers exist to make software installation reproducible and maintainable. A project should be able to say what it depends on, which version was resolved, and how another developer can obtain the same working setup. Virtual environments and project-local tooling are not ceremony for its own sake; they stop one project's needs leaking into another's.
 
+Reproducibility should not mean immobility. Projects evolve by updating a declared dependency, image, skill, or instruction deliberately; regenerating and reviewing the lockfile; validating the change in a clean environment; and retaining a known-good version to which they can return. The same discipline that makes an npm upgrade explainable can make a change to an agent skill or harness explainable.
+
 The same idea applies to agentic work, only the inputs are wider now. A project may depend on:
 
 - language packages and system tools;
@@ -62,13 +64,23 @@ This is where project templates and harnesses can earn their keep. A template sh
 
 That can be a devcontainer, a Docker image, Nix, a VM, a Makefile, or a package-manager command. The implementation matters less than the property: “clone this repository and run the documented setup” should be more reliable than “install whatever I have globally and copy the instructions from my home directory.”
 
-The Apptension handbook is useful here precisely because it is not written as an AI manifesto. It treats conventions, code review, quality gates, project setup, and a shared understanding of “done” as ordinary professional practice. Agents do not make those things obsolete. They make the cost of not having them much more visible.
+The Apptension handbook is useful here precisely because it is not written as an AI manifesto. It treats onboarding, agreed conventions, pull-request review, protected branches, checking a failed build before merging, and careful credential handling as ordinary professional practice. Agents do not make those things obsolete. They make the cost of not having them much more visible.
 
 ## A harness should be a control plane, not a bag of prompts
 
 The word *harness* can sound needlessly grand. I mean the layer that gives an agent its job, tools, context, permissions, and feedback loop. It is the bit that says: use this checkout, follow these versioned instructions, run these commands, ask before doing this, and show the human the resulting diff.
 
 Tweag's [Agentic Coding Handbook](https://tweag.github.io/agentic-coding-handbook/) is valuable because it puts emphasis on engineering process rather than pretending that a better prompt is a replacement for one. Google's [agentic AI design-pattern guidance](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) makes a similar architectural point: choose patterns according to the work, with evaluation, observability, and appropriate controls rather than autonomous behaviour as the default setting. Claude Code's [best practices](https://code.claude.com/docs/en/best-practices) are equally practical: give the tool clear context, keep work scoped, use project instructions, and verify the result.
+
+They are not all making the same argument:
+
+| Source | Its useful question | Harness implication |
+| --- | --- | --- |
+| Tweag | How do people work effectively with coding agents? | Keep tasks small, use specifications, and retain code review. |
+| Google Cloud | Does this task need an agent at all, and how much autonomy does it deserve? | Start with the smallest pattern that fits; add agents, tools, and permissions only when the work requires them. |
+| Claude Code | How does an agent complete repository work reliably? | Version the context, provide a command that verifies the result, and make the resulting evidence reviewable. |
+
+Together, they describe the layers of a sensible harness: choose the right amount of autonomy, give it a bounded job and context, and require evidence before declaring it finished.
 
 None of that requires a giant platform. A modest harness for a repository can be enough:
 
@@ -89,7 +101,7 @@ There is a temptation to reuse agent configuration by accumulating it in a globa
 
 It is efficient right up to the point where nobody can explain why a particular agent had a particular instruction, where it came from, or what it is now allowed to do.
 
-My earlier post on [refactoring agent workflows](/development/agents/2026/03/09/refactoring-agent-workflows.html) was mostly about reducing process overhead. I still think a lightweight Plan → Tasks → Implementation loop is the right shape for small work. But simplicity is not the same as invisible state. A short plan is easier to review when the environment that executes it is also understandable.
+My earlier post on [refactoring agent workflows](/development/agents/2026/03/09/refactoring-agent-workflows.html) was mostly about reducing process overhead. I still think a lightweight Plan → Tasks → Implementation loop is the right shape for small work: a scoped task, named checks, and a reviewable diff make a useful evidence trail. But simplicity is not the same as invisible state. A short plan is easier to review when the environment that executes it is also understandable.
 
 The useful kind of reuse is a repository template, an image definition, a setup command, a versioned skill package, and a lockfile. Those are recipes other people can inspect, reproduce, update deliberately, and roll back. The dangerous kind is a personal agent directory slowly becoming a second, undocumented operating system.
 
