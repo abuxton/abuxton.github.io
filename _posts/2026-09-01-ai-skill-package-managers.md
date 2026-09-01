@@ -18,7 +18,7 @@ The awkward truth is that skills, prompts, rules, MCP configurations, and agent 
 
 We are still early enough that “AI package manager” describes several different things: a discovery CLI, a package-manager integration, a registry, or a reproducibility layer. The names will change. The problems are familiar.
 
-## Five approaches worth watching
+## Six approaches worth watching
 
 | Tool | Model | What it brings |
 | --- | --- | --- |
@@ -26,6 +26,7 @@ We are still early enough that “AI package manager” describes several differ
 | [skills-npm](https://github.com/antfu/skills-npm) | npm package integration | Ships skills alongside the JavaScript packages that need them |
 | [Quiver](https://github.com/astra-sh/qvr) | Git-native, lockfile-first skill manager | Immutable installs, scan results, provenance, and reproducible sync |
 | [Tank](https://github.com/tankpkg/tank) | Registry and security-first package manager | Versions, a lockfile, declared permissions, and an audit workflow |
+| [Microsoft APM](https://microsoft.github.io/apm/) | Manifest and policy manager for agent context | A locked, governed configuration spanning skills, instructions, plugins, and MCP servers |
 | [Grimoire](https://github.com/grimoire-rs/grimoire) | OCI-backed multi-agent package manager | Digest-pinned artifacts in registries an organisation can control |
 
 ### 1. skills.sh: the discovery layer
@@ -78,7 +79,21 @@ tank verify
 
 That is a useful design challenge to the rest of the field. Agent skills are not ordinary libraries. A library normally runs because *our* code invokes it. A skill can influence the plan that decides what commands run next. Declaring capabilities cannot prove that an instruction is honest, but it makes a surprising expansion in authority observable and gives CI something concrete to reject.
 
-### 5. Grimoire: use an existing artifact supply chain
+### 5. Microsoft APM: govern the whole harness
+
+[Microsoft's Agent Package Manager (APM)](https://microsoft.github.io/apm/) takes the broadest view of what belongs in a dependency manifest. Its `apm.yml` can declare skills, instructions, prompts, agents, hooks, plugins, and MCP servers; `apm.lock.yaml` resolves and pins the resulting tree. The same project configuration can be installed for Copilot, Claude Code, Cursor, Codex, Gemini, and other supported clients:
+
+```bash
+apm install vercel-labs/agent-skills --skill deploy-to-vercel
+apm audit
+apm compile -t copilot
+```
+
+That last command is a useful practical detail: APM can compile the managed configuration to `.github/copilot-instructions.md`, which Copilot consumes directly. It is not merely a skill installer; it is trying to make all the material that shapes an agent's behaviour portable and reproducible.
+
+APM is also unusually explicit about the distinction between a package policy and an agent sandbox. Its `apm-policy.yml` can limit permitted sources, scopes, and primitive types with tighten-only inheritance from enterprise to organisation to repository. It scans content, records integrity hashes, detects drift, requires consent for transitive MCP servers, and can export a CycloneDX or SPDX inventory. Those controls do not decide which commands an installed agent is allowed to execute—that remains the harness's job—but they create a credible governance layer before the harness reads the material.
+
+### 6. Grimoire: use an existing artifact supply chain
 
 [Grimoire (`grim`)](https://github.com/grimoire-rs/grimoire) packages skills, rules, agents, commands, and MCP servers as OCI artifacts. That means a team can use GHCR, Docker Hub, or its own registry rather than trusting another hosted skill service:
 
@@ -118,7 +133,7 @@ Software development did not become safer because every package author became tr
 
 AI harnesses need the equivalent, with one addition: permissions. A library has an API surface. An agent skill has an authority surface. Where can it read? What can it write? Can it execute a subprocess? Which hosts can it contact? Can it alter the files that define its future behaviour?
 
-The five projects above do not agree on packaging, storage, or even the unit being installed. That is fine. The useful competition is over the boring bits: immutable resolution, explicit scope, provenance, inspection, revocation, and repeatable installs. I would rather see several incompatible tools get those properties right than one enormous skill marketplace normalise clicking “install” on a blob of instructions with my shell and tokens behind it.
+The six projects above do not agree on packaging, storage, or even the unit being installed. That is fine. The useful competition is over the boring bits: immutable resolution, explicit scope, provenance, inspection, revocation, and repeatable installs. I would rather see several incompatible tools get those properties right than one enormous skill marketplace normalise clicking “install” on a blob of instructions with my shell and tokens behind it.
 
 Skills are a lovely way to turn accumulated practice into something an agent can reuse. That makes them valuable. It also makes them dependencies. The sooner we manage them as such, the less surprising the first serious skills supply-chain incident will be.
 
@@ -128,6 +143,7 @@ Skills are a lovely way to turn accumulated practice into something an agent can
 - [skills-npm](https://github.com/antfu/skills-npm)
 - [Quiver](https://github.com/astra-sh/qvr)
 - [Tank](https://github.com/tankpkg/tank)
+- [Microsoft APM](https://microsoft.github.io/apm/)
 - [Grimoire](https://github.com/grimoire-rs/grimoire)
 - [Docker Sandboxes for Safer AI Agents](/ai/security/2026/08/26/docker-sandboxes-safer-ai-agents.html)
 - [Building Agent Skills: Do-Nothing Scripting and Gradual Automation](/development/automation/agents/2026/04/05/building-agent-skills-do-nothing-scripting.html)
