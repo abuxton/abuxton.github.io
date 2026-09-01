@@ -6,8 +6,8 @@ This is a Jekyll-based personal blog hosted on GitHub Pages at `blog.abcdevelopm
 
 **Technology Stack:**
 - Jekyll static site generator
-- Minima theme
-- GitHub Pages hosting
+- Chirpy theme (`cotes2020/jekyll-theme-chirpy` v7.x)
+- GitHub Pages hosting, built and deployed by GitHub Actions
 - Ruby 3.3.7 (pinned in `.ruby-version`)
 - Makefile-based task automation
 
@@ -20,15 +20,33 @@ make jekyll-serve             # Serve locally with livereload
 make jekyll-serve JEKYLL_OPTS="--drafts"  # Include draft posts
 make jekyll-clean             # Clean build
 make new-post title="Title"   # Create new post
+make new-post title="Title" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"
 ```
 
 **Project Structure:**
 - `_config.yml` — Site configuration (title, baseurl, theme, plugins)
 - `_posts/` — Blog posts with Jekyll front matter
-- `index.markdown` — Home page
-- `about.markdown` — About page
+- `_tabs/` — Chirpy navigation tabs
+- `.github/workflows/pages-deploy.yml` — Builds and deploys the site with
+  GitHub Actions
 - `common/` — Shared Makefile utilities (not site content)
 - `CNAME` — Custom domain configuration
+
+## Branch and Deployment Model
+
+`gh-pages` is the source branch for this site, not a generated-output branch.
+The GitHub Actions Pages workflow checks out `gh-pages`, builds the Chirpy
+site with Bundler, and deploys the resulting `_site` artifact through the
+GitHub Pages API.
+
+- Start blog-content and site changes from an up-to-date `gh-pages` branch.
+- Open pull requests for those changes against `gh-pages`, including from
+  feature branches forked from it.
+- Do not manually copy `_site` output to a branch or use a direct
+  `deploy-gh-pages` target; the workflow deploys after changes reach
+  `gh-pages`.
+- Keep `.github/workflows/pages-deploy.yml` on `gh-pages`, because that is
+  the source checked out by the deployment workflow.
 
 ## Workflow Approach
 
@@ -41,6 +59,48 @@ Work on this project follows a simple **Plan → Tasks → Implementation** patt
 5. **Integration** — Commit and deploy via Git/GitHub Pages
 
 This approach is lightweight, practical, and integrates seamlessly with Jekyll and Git workflows.
+
+## Creating Blog Posts
+
+Create posts with the Makefile so the filename and required front matter are
+consistent:
+
+```bash
+# A post written without an AI co-author
+make new-post title="My Post Title" slug="my-post-slug"
+
+# A post co-authored with an AI agent
+make new-post title="My Post Title" \
+  agent="GitHub Copilot" \
+  agent_url="https://github.com/features/copilot"
+```
+
+For every post co-authored by an AI agent, pass both `agent` and `agent_url`.
+The scaffold adds a visible `🤖` attribution block below the front matter.
+Keep that block in the published post, name the agent accurately, and point
+to an authoritative agent or provider URL. Do not add the block to posts that
+were not co-authored by an AI agent.
+
+Use this form if an existing AI-assisted post needs an attribution added:
+
+```markdown
+> 🤖 **AI co-author:** [Agent name](https://authoritative-agent-or-provider-url.example)
+```
+
+Follow the post front matter convention:
+
+```yaml
+---
+layout: post
+title: "Post Title"
+date: YYYY-MM-DD HH:MM:SS +0000
+categories: [main-category, sub-category]
+tags: [tag1, tag2, tag3]
+---
+```
+
+Use a maximum of two category levels for Chirpy. Both `categories` and
+`tags` must be YAML arrays.
 
 ## Available Skills
 
@@ -118,11 +178,13 @@ Systematically analyze societal impacts of technologies using McLuhan's Tetrad o
 2. **Plan** — Create a task list for implementation
 3. **Implement** — Make changes, use `git-workflow` for commits
 4. **Document** — Write markdown (use `markdown-documentation`) or create slides (use `pptx` or `revealjs-presenter`)
-5. **Validate** — Run `make jekyll-serve` to test locally
-6. **Commit** — Use Conventional Commits with `git-workflow`
+5. **Validate** — Run `make jekyll-build` to validate the generated site
+6. **Commit** — Use Conventional Commits with `git-workflow`, then merge into
+   `gh-pages` to deploy
 
 **Examples:**
-- **New blog post:** `make new-post title="My Post"` → Write markdown → `make jekyll-serve` → Test → Commit
+- **New blog post:** `make new-post title="My Post"` → Write markdown → `make jekyll-build` → Commit → Merge into `gh-pages`
+- **AI-co-authored post:** `make new-post title="My Post" agent="GitHub Copilot" agent_url="https://github.com/features/copilot"` → Keep the generated attribution → Write markdown → `make jekyll-build`
 - **Site documentation:** Use `doc-coauthoring` to plan → `markdown-documentation` to write → Commit
 - **Presentation:** Use `pptx` or `revealjs-presenter` to create → Export → Deploy
 
