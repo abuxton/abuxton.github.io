@@ -16,7 +16,9 @@ https:// {64659, 123310, 75584, 8138, 38271}
 
 It led to Listen Labs' [Berghain Challenge](https://berghain.challenges.listenlabs.ai/),
 where you act as a nightclub bouncer and must fill a venue while meeting rules
-about the people admitted. Credit for identifying the tokenizer solution goes
+about the people admitted. The whole thing was actually a job application and puzzle. 
+
+Credit for identifying the tokenizer solution goes
 to [@0x686967](https://x.com/0x686967/status/1962953670703841724).
 
 At first glance it invites the usual decoding guesses. Are the numbers decimal
@@ -59,11 +61,6 @@ https://listenlabs.ai/puzzle
 
 ## Explain it like I am five
 
-First, the challenge is a make-believe nightclub game. You are the person at
-the door. People arrive one at a time, and you must decide whether to let them
-in. You need to fill the club, but also make sure enough guests match the
-rules--for example, enough local people or enough people dressed in black.
-
 The billboard was the signpost to that game, but it hid the web address. Imagine
 a giant book where little pieces of text are given number labels. The book might
 have entries for parts of words, whole words, dots, or slashes. Instead of
@@ -75,7 +72,30 @@ writing the address on the billboard, someone wrote the labels:
 
 Those labels look like nonsense unless you have the same giant book. The
 `o200k_base` tokenizer is that book. When it looks up the five labels in order,
-it puts the text pieces back together:
+
+Imagine a giant book where every tiny piece of text has a number.
+
+For example, the book might say:
+
+• number  64659  means  "listen" 
+• another number means  "labs" 
+• another means  ".ai" 
+• another means  "/" 
+• another means  "puzzle" 
+
+The billboard showed only the numbers:
+
+64659, 123310, 75584, 8138, 38271
+
+They look meaningless until you use the same giant book—called the  o200k_base  tokenizer—to look each number up. It turns the number pieces back into text:
+
+listenlabs.ai/puzzle
+
+Then we add  https://  at the front, like putting an address on an envelope:
+
+https://listenlabs.ai/puzzle
+
+It was a secret web address written using an AI’s word-number dictionary, not ordinary encryption
 
 ```text
 listenlabs.ai/puzzle
@@ -89,7 +109,9 @@ https://listenlabs.ai/puzzle
 
 So the solution is not a secret-number trick: it is the right lookup book for
 an AI's word-and-number dictionary. The exact pieces do not have to be whole
-words; together, they spell the address to the challenge.
+words; together, they spell the address to the challenge. 
+Effectively, we cheated and used an abstraction of every possible Agnetic tokeniser to get a sane answer and test.
+If you are bored, try printing out every answer and test them... 
 
 ## Why `o200k_base`?
 
