@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Agent Harnesses Need the Boring Practices Too"
-date: 2026-09-01 08:44:17 +0000
+date: 2026-09-06 08:44:17 +0000
 categories: [ai, development]
 tags: [ai-agents, agent-harnesses, developer-environments, package-management, supply-chain-security, reproducibility]
 ---
