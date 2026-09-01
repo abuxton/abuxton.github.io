@@ -1,0 +1,80 @@
+name: Sync agent environment branches
+
+on:
+  push:
+    branches:
+      - main
+      - gh-pages
+    paths:
+      - AGENTS.md
+      - .github/copilot-instructions.md
+      - skills-lock.json
+      - .github/workflows/sync-agent-environment.yml
+  workflow_dispatch:
+    inputs:
+      source_branch:
+        description: Branch whose agent environment should be synchronized
+        required: true
+        default: main
+        type: choice
+        options:
+          - main
+          - gh-pages
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-agent-environment
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.source_branch || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Synchronize agent environment
+        env:
+          SOURCE_BRANCH: ${{ inputs.source_branch || github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          case "$SOURCE_BRANCH" in
+            main) TARGET_BRANCH=gh-pages ;;
+            gh-pages) TARGET_BRANCH=main ;;
+            *)
+              echo "Unsupported source branch: $SOURCE_BRANCH" >&2
+              exit 1
+              ;;
+          esac
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$TARGET_BRANCH"
+          git switch --create "$TARGET_BRANCH" --track "origin/$TARGET_BRANCH"
+
+          git restore --source="origin/$SOURCE_BRANCH" -- \
+            AGENTS.md \
+            .github/copilot-instructions.md \
+            skills-lock.json \
+            .github/workflows/sync-agent-environment.yml
+
+          git add \
+            AGENTS.md \
+            .github/copilot-instructions.md \
+            skills-lock.json \
+            .github/workflows/sync-agent-environment.yml
+
+          if git diff --cached --quiet; then
+            echo "Agent environment is already synchronized."
+            exit 0
+          fi
+
+          git commit -m "chore: sync agent environment from $SOURCE_BRANCH"
+          git push origin "HEAD:$TARGET_BRANCH"
