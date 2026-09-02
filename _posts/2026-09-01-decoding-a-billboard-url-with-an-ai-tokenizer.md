@@ -5,14 +5,8 @@ date: 2026-09-01 14:40:58 +0000
 categories: [ai, puzzles]
 tags: [tokenization, o200k-base, openai, go, puzzles, billboards]
 ---
-
-> 🤖 **AI co-author:** [GitHub Copilot](https://github.com/features/copilot)
-
 I saw a photo of an SF billboard with what looked like a broken URL:
-
-```text
-https:// {64659, 123310, 75584, 8138, 38271}
-```
+`https:// {64659, 123310, 75584, 8138, 38271}` 
 
 It led to Listen Labs' [Berghain Challenge](https://berghain.challenges.listenlabs.ai/),
 where you act as a nightclub bouncer and must fill a venue while meeting rules
@@ -185,3 +179,6 @@ identify likely vocabularies from the number range and context, decode the
 sequence, then check whether the result is meaningful.
 
 In this case, the meaning was a URL hiding in plain sight.
+
+
+> 🤖 **AI co-author:** [GitHub Copilot](https://github.com/features/copilot)
