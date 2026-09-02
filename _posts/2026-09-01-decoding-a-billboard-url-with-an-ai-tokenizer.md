@@ -6,7 +6,7 @@ categories: [ai, puzzles]
 tags: [tokenization, o200k-base, openai, go, puzzles, billboards]
 ---
 I saw a photo of an SF billboard with what looked like a broken URL:
-`https:// {64659, 123310, 75584, 8138, 38271}` 
+`https:// {64659, 123310, 75584, 8138, 38271}`
 
 It led to Listen Labs' [Berghain Challenge](https://berghain.challenges.listenlabs.ai/),
 where you act as a nightclub bouncer and must fill a venue while meeting rules
