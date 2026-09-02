@@ -82,7 +82,8 @@ make new-post title="My Post Title" \
 ```
 
 For every post co-authored by an AI agent, pass both `agent` and `agent_url`.
-The scaffold adds a visible `🤖` attribution block below the front matter.
+The scaffold adds a visible `🤖` attribution block as the post footer.
+
 Keep that block in the published post, name the agent accurately, and point
 to an authoritative agent or provider URL. Do not add the block to posts that
 were not co-authored by an AI agent.
