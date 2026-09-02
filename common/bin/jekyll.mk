@@ -64,11 +64,11 @@ new-post: ## Create a post. AI co-authors require agent and agent_url.
 	  echo "Usage: make new-post title=\"My Title\" [slug=\"my-slug\"] [layout=\"post\"] [agent=\"Agent\" agent_url=\"https://...\"]"; \
 	  exit 1; \
 	fi
-	@if { [ -n "$(agent)" ] && [ -z "$(agent_url)" ]; } || { [ -z "$(agent)" ] && [ -n "$(agent_url)" ]; }; then \
+	@layout=$${layout:-post}; \
+    @if { [ -n "$(agent)" ] && [ -z "$(agent_url)" ]; } || { [ -z "$(agent)" ] && [ -n "$(agent_url)" ]; }; then \
 	  echo "AI co-authors require both agent and agent_url."; \
 	  exit 1; \
 	fi
-	@layout=$${layout:-post}; \
 	slug=$$([ -n "$(slug)" ] && echo "$(slug)" || echo "$(title)" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g' | sed -E 's/^-|-$$//g'); \
 	date=$$(date "+%Y-%m-%d"); \
 	filename="_posts/$$date-$$slug.md"; \
