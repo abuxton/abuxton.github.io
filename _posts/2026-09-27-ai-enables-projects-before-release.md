@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AI Enables Projects Before They Are Ready to Be Released"
-date: 2026-09-20 09:00:00 +0100
+date: 2026-09-27 09:00:00 +0100
 categories: [development, ai]
 tags: [ai-agents, software-engineering, open-source, decision-making, developer-tools]
 ---
@@ -62,34 +62,42 @@ nature. The effect depends on the task, the developer, the codebase, the tools,
 and the quality of the question being asked. But a faster first pass, even in a
 limited set of tasks, can still change what a person is willing to explore.
 
-## Pheromone: substantial is not the same as releasable
+## Pheromone: public source is not a public promise
 
-I have a private repository called Pheromone that makes this distinction
-concrete. It began on 18 February 2026 as an exploration of what might happen
-if AI-capable processes could communicate with and manage distributed systems.
-The architecture is a Go-based distributed digital-twin experiment: a
-one-to-many twin model spans operating-system, workload, and management layers.
+[Pheromone](https://github.com/abuxton/pheromone) is now public. It began on
+18 February 2026 as an exploration of what might happen if AI-capable processes
+could communicate with and manage distributed systems. Its published
+documentation describes a Go-based distributed digital-twin platform, with a
+one-to-many model across operating-system, workload, and management layers.
 
-The project grew beyond the initial question. It accumulated architecture
-decision records, specifications, benchmarks, local environments, CI and
-security workflows, observability, role-based access control, an API and UI
-gateway, and developer and DevOps agent skills. At the point I recorded the
-history in early April, it had 65 merged pull requests, out of 86 in total.
-Its working design includes gRPC and Protocol Buffers, NATS JetStream,
-in-memory and etcd-backed persistence, audit and reasoning traces, Prometheus
-and Grafana, Docker Compose and Vagrant environments, and a command-line
-client.
+The public repository makes the project's shape inspectable: its architecture
+decision records, local development environments, contributor guide, security
+policy, and source are available for others to evaluate. It is MIT-licensed,
+but its own README calls it early-stage. There are no GitHub releases or tags
+from which to infer a stable version or a release cadence.
 
-Those details are deliberately architectural rather than operational. Pheromone
-is still private and positioned as team-internal development and exploration;
-I am not linking to it or presenting it as a released product.
+That distinction matters because a public repository is not the same thing as a
+general-purpose, production-ready service. Pheromone's published security
+policy describes work that remains to be done on transport security,
+network-level authentication, and sandboxing. Until then, it instructs
+operators to use network-isolated deployments and trusted built-in skills. That
+is a useful public threat-model boundary, not a promise that every deployment
+is safe.
 
-Agent assistance made the expansion possible. It helped turn a question into
-supporting tooling, tests, documentation, local environments, and operational
-scaffolding that would have been difficult to sustain from the original idea
-alone. That does not make it ready for strangers to depend on.
+The repository does show some stewardship signals. Its contributor guide
+requires tests, linting, and architecture-decision records for material
+changes, and it directs vulnerability reports to GitHub's private reporting
+channel rather than public issues. Those are concrete processes. They do not,
+on their own, establish who will support users, what response capacity exists,
+or a wider governance model.
 
-A public release would need different answers:
+Agent assistance made the project's expansion possible. It helped turn a
+question into supporting tooling, tests, documentation, local environments, and
+operational scaffolding that would have been difficult to sustain from the
+original idea alone. Public release makes that work available for scrutiny. It
+does not turn a functioning project into a promise to strangers.
+
+A release still needs different answers:
 
 1. Who is the user, specifically?
 2. What is the smallest promise I am prepared to make and keep?
@@ -201,4 +209,5 @@ human decision.
 - [The effects of generative AI on high-skilled work](https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/) — Microsoft Research field experiments on coding-assistant access
 - [Early-2025 AI experienced open-source developer study](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) and [METR's update](https://metr.org/blog/2026-02-24-uplift-update/) — evidence and limitations from a different setting
 - [Effects of explanations and cognitive forcing functions on overreliance on AI decision support systems](https://doi.org/10.1145/3449287) — a peer-reviewed study of over-reliance
+- [Pheromone](https://github.com/abuxton/pheromone), its [contributor guide](https://github.com/abuxton/pheromone/blob/main/CONTRIBUTING.md), and its [security policy](https://github.com/abuxton/pheromone/blob/main/SECURITY.md) — primary sources for its public scope and stated operating boundaries
 - [OpenClaw](https://github.com/openclaw/openclaw) and its [contribution guide](https://github.com/openclaw/openclaw/blob/main/CONTRIBUTING.md) — primary project sources
