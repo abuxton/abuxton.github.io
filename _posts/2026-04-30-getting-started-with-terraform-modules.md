@@ -48,19 +48,22 @@ The stages are:
 
 Stage 1 is the simplest possible starting point. Two resources, no variables, no modules.
 
-```hcl
-resource "random_pet" "label" {
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>resource "random_pet" "label" {
   length    = 2
   separator = "-"
 }
 
-resource "time_static" "created" {}
-```
+resource "time_static" "created" {}</code></pre>
+  </div>
+</div>
 
 This is what most Terraform journeys look like on day one. You have an idea, you need some infrastructure, and you write the resources directly. The `versions.tf` file constrains the provider versions, which is good practice from the outset:
 
-```hcl
-terraform {
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>terraform {
   required_version = ">= 1.6.0"
 
   required_providers {
@@ -73,8 +76,9 @@ terraform {
       version = "~> 0.12"
     }
   }
-}
-```
+}</code></pre>
+  </div>
+</div>
 
 This stage represents the beginning of a personal infrastructure project — the kind of code you might write to experiment, to automate something for yourself, or to prototype a concept. It is the seed from which everything else grows.
 
@@ -82,8 +86,9 @@ This stage represents the beginning of a personal infrastructure project — the
 
 Stage 2 introduces `locals` — a way of declaring named values within the root module without exposing them as external inputs.
 
-```hcl
-locals {
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>locals {
   name_prefix = "stage2"
   pet_length  = 2
   separator   = "-"
@@ -101,8 +106,9 @@ resource "time_static" "created" {}
 resource "time_offset" "expires" {
   base_rfc3339 = time_static.created.rfc3339
   offset_hours = local.ttl_hours
-}
-```
+}</code></pre>
+  </div>
+</div>
 
 This is a small but significant improvement. Rather than hardcoding values directly in resource blocks — which becomes unmaintainable as a project grows — `locals` creates a single place to define configuration. Changing `ttl_hours` now means changing it in one place, not hunting through resource blocks.
 
@@ -114,8 +120,9 @@ Stage 3 is where modularisation begins. The resources from stage 2 are extracted
 
 The child module (`modules/nested_label/main.tf`):
 
-```hcl
-resource "random_pet" "label" {
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>resource "random_pet" "label" {
   prefix    = var.name_prefix
   length    = var.pet_length
   separator = var.separator
@@ -126,13 +133,15 @@ resource "time_static" "created" {}
 resource "time_offset" "expires" {
   base_rfc3339 = time_static.created.rfc3339
   offset_hours = var.ttl_hours
-}
-```
+}</code></pre>
+  </div>
+</div>
 
 The root module (`main.tf`):
 
-```hcl
-locals {
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>locals {
   name_prefix = "stage3"
   pet_length  = 2
   separator   = "-"
@@ -146,8 +155,9 @@ module "nested_label" {
   pet_length  = local.pet_length
   separator   = local.separator
   ttl_hours   = local.ttl_hours
-}
-```
+}</code></pre>
+  </div>
+</div>
 
 The child module has its own `variables.tf` and `outputs.tf`, giving it a clean contract: you pass values in, you get outputs back, and the implementation is encapsulated. This is the pattern for building reusable abstractions within a monorepo.
 
@@ -159,8 +169,9 @@ Stage 4 introduces the component source pattern and, significantly, Terraform te
 
 The layout shifts from `modules/` to `components/`, signalling a conceptual distinction: the `utility_component` here is structured as if it were a separately sourceable module. The comment in the main file makes this explicit:
 
-```hcl
-# equivalent to an example of sourcing registry.terraform.io/abuxton/utility_component/local
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code># equivalent to an example of sourcing registry.terraform.io/abuxton/utility_component/local
 module "utility_component" {
   source = "./components/utility_component"
 
@@ -168,8 +179,9 @@ module "utility_component" {
   pet_length  = local.pet_length
   separator   = local.separator
   ttl_hours   = local.ttl_hours
-}
-```
+}</code></pre>
+  </div>
+</div>
 
 The `./components/utility_component` path stands in for what would, in a real-world scenario, be a registry source or a Git URL. This is the staging ground before extraction: the component is developed locally, given its own interface, and tested — then ready to be published when the time comes.
 
@@ -179,8 +191,9 @@ The `tests/` directory introduces `terraform test`, which was added to Terraform
 
 Stage 5 adds variables to the root module alongside the existing `locals` pattern, using `coalesce` to merge caller-supplied values with opinionated defaults:
 
-```hcl
-locals {
+<div class="language-hcl highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>locals {
   defaults = {
     name_prefix = "stage5"
     pet_length  = 2
@@ -203,8 +216,9 @@ module "utility_component" {
   pet_length  = local.effective.pet_length
   separator   = local.effective.separator
   ttl_hours   = local.effective.ttl_hours
-}
-```
+}</code></pre>
+  </div>
+</div>
 
 This is the governance pattern. A root module declares what the defaults are — encoding the policy of the platform team or the organisation — while still allowing callers to override specific values when they have a legitimate reason to do so. `coalesce` uses the first non-null value, so if `var.name_prefix` is `null` (i.e., the caller did not supply it), the default is used.
 
@@ -226,8 +240,9 @@ The repository never reaches the registry step explicitly — it uses local path
 
 Each stage is self-contained and runnable. Clone the repository and work through the stages in order:
 
-```bash
-git clone https://github.com/abuxton/terraform-hcl-enablement
+<div class="language-bash highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>git clone https://github.com/abuxton/terraform-hcl-enablement
 cd terraform-hcl-enablement
 
 # Work through each stage
@@ -235,16 +250,19 @@ cd examples/stage-1-root-module
 terraform init -backend=false
 terraform plan
 terraform apply -auto-approve
-terraform destroy -auto-approve
-```
+terraform destroy -auto-approve</code></pre>
+  </div>
+</div>
 
 For stages 4 and 5, you can also run the test suite:
 
-```bash
-cd examples/stage-4-component-source
+<div class="language-bash highlighter-rouge">
+  <div class="highlight">
+    <pre class="code-block"><code>cd examples/stage-4-component-source
 terraform init -backend=false
-terraform test
-```
+terraform test</code></pre>
+  </div>
+</div>
 
 No cloud credentials are required. The `hashicorp/random` and `hashicorp/time` providers work entirely locally.
 
