@@ -3,7 +3,7 @@ layout: post
 title: "Building a DevOps / SRE Operator Toolkit with Do-Nothing Scripting"
 date: 2026-10-23 11:13:11 +0000
 categories: [development, sre]
-tags: [devops, sre, bash, automation, github-gists, kubernetes, incident-response, runbooks]
+tags: [devops, sre, bash, automation, github-gists, kubernetes, incident-response, runbooks, lvm, ibm-bob]
 ---
 
 There is a familiar first half-hour to a new engagement. You arrive at a
@@ -89,6 +89,7 @@ the services supporting an application.
 | `port-forward.sh` | Interactive `kubectl port-forward` management | [G12](https://gist.github.com/abuxton/4ffc703faa085709080641169aed18e6) |
 | `ssh-tunnel.sh` | Bastion tunnel management with status checks | [G13](https://gist.github.com/abuxton/ab9a38a6cda3d32e87a53b421f540dea) |
 | `db-healthcheck.sh` | Health checks for PostgreSQL, MySQL, Redis, and MongoDB | [G14](https://gist.github.com/abuxton/aa01d2feb36bad6a689aecf5f3b1abf1) |
+| `lvm-manage.sh` | LVM inspection, mount auditing, capacity thresholds, and guided actions | [G15](https://gist.github.com/abuxton/a43cba4ff6a5c6efc0603c6a3196adc2) |
 
 ### Incident response and bootstrap diagnostics
 
@@ -97,9 +98,9 @@ vendor, or a later post-incident review.
 
 | Script | Purpose | Gist |
 |---|---|---|
-| `incident-capture.sh` | Kubernetes snapshot captured to a timestamped archive | [G15](https://gist.github.com/abuxton/68d977f847f812d89da0744c46cfce9c) |
-| `metrics-check.sh` | Prometheus endpoint checks and stale-metric detection | [G16](https://gist.github.com/abuxton/e0113a1024c26b71000ff0add4ebae8e) |
-| `cloud-init-debug.sh` | cloud-init and user-data diagnostics across common platforms | [G17](https://gist.github.com/abuxton/73cccdede381ec815be3d8f3899e1d28) |
+| `incident-capture.sh` | Kubernetes snapshot captured to a timestamped archive | [G16](https://gist.github.com/abuxton/68d977f847f812d89da0744c46cfce9c) |
+| `metrics-check.sh` | Prometheus endpoint checks and stale-metric detection | [G17](https://gist.github.com/abuxton/e0113a1024c26b71000ff0add4ebae8e) |
+| `cloud-init-debug.sh` | cloud-init and user-data diagnostics across common platforms | [G18](https://gist.github.com/abuxton/73cccdede381ec815be3d8f3899e1d28) |
 
 ## A few that earn their place quickly
 
@@ -120,6 +121,37 @@ metadata and logs for AWS, GCP, Azure, VMware, and local systems, and can wait
 for cloud-init to reach a terminal state. The important detail is that
 bootstrapping differs across providers; detection is useful, but an explicit
 override remains necessary for unusual images and networks.
+
+`lvm-manage.sh` adds the same approach to local storage. It inventories
+physical volumes, volume groups, and logical volumes; checks mount status and
+`/etc/fstab`; and warns when filesystem usage crosses configurable thresholds.
+It can guide an operator through extending, creating, mounting, or unmounting
+logical volumes. Those actions remain consequential, so the dry-run path is
+especially useful before an operator selects one.
+
+## How the scripts were made
+
+I used [IBM Bob](https://bob.ibm.com/) as an AI coding assistant while building
+the Gists. Bob works in the codebase from natural-language requests, which was
+useful for turning an operational goal into an initial shell implementation
+without moving the work into a separate chat window. That accelerated the
+first pass; it did not remove the need to read the commands, test them in the
+right environment, and decide whether the tool's scope was actually sensible.
+
+The companion
+[do-nothing-scripting skill](https://github.com/abuxton/Skills/blob/main/skills/do-nothing-scripting/SKILL.md)
+provided the more important structure. It takes a command sequence from a
+terminal recording, text, shell history, or an interview and groups it into
+named operator steps. Each step can collect the context it needs, print the
+commands, and pause for the operator before moving on. The same skill makes a
+useful distinction between a guided procedure and an automated script: the
+former is an interactive operator guide, not something to run in CI.
+
+Using Bob to help draft the implementation and the skill to keep the
+do-nothing path explicit made the scripts easier to evolve. The manual step
+is a real interface, not placeholder code. When a step is understood well
+enough to automate, its function can change without forcing the rest of the
+procedure to change with it.
 
 ## Why publish the scripts as Gists?
 
