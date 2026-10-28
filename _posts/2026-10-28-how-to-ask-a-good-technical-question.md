@@ -8,7 +8,11 @@ tags: [questions, debugging, stackoverflow, github, ai, writing]
 
 A good question gets a useful answer faster. When you ask for help, the person reading cannot see your screen, project, or the steps that led to the problem. Your job is to close that gap.
 
-This guide is a short, stable link for anyone wondering how to ask for technical help. It applies to Stack Overflow, support forums, team chat, and issue trackers. Each community has its own rules, so read them first. For a reminder of how support conversations can go wrong, see XKCD's [“Tech Support”](https://xkcd.com/806/).
+This guide is a short, stable link for anyone wondering how to ask for technical help. It applies to Stack Overflow, support forums, team chat, and issue trackers. Each community has its own rules, so read them first. For a reminder of how support conversations can go wrong, see XKCD's *Tech Support*:
+
+[![XKCD's Tech Support comic](https://imgs.xkcd.com/comics/tech_support.png "I recently had someone ask me to go get a computer and turn it on so I could restart it. He refused to move further in the script until I said I had done that.")](https://xkcd.com/806/)
+
+*XKCD's [“Tech Support”](https://xkcd.com/806/), by Randall Munroe.*
 
 ## Before you post
 
