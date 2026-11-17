@@ -23,6 +23,27 @@ HashiCorp Vault using the [External Secrets Operator](https://external-secrets.i
 (ESO). The pattern applies to Vault Enterprise and HCP Vault as much as to the
 in-cluster dev instance used in the demo.
 
+The migration process also needs to fit the Vault design, not just move values.
+A platform team might establish Vault namespaces and secrets engine mounts for
+different parts of the organisation, with policies defining who can write to
+each path. A reusable pull-and-push process can follow that design: the same
+approach can be adapted for each source and destination, rather than asking
+one team to run a single migration for everyone.
+
+That makes it possible to separate core platform secrets from product and
+development team secrets. The platform team can migrate the shared services it
+owns and provide guidance on destination paths, access, review and cutover.
+Product teams can then migrate and validate their own secrets within those
+boundaries, taking responsibility for their applications without needing
+access to another team's secrets.
+
+The demo shows the mechanics with one source and one Vault mount; it does not
+implement that multi-team design. In practice, each migration needs its own
+approved source and destination, appropriately scoped Kubernetes and Vault
+permissions, and an agreed way to verify the result and retire the old
+credentials. Vault namespaces and mounts help organise that work, but access
+policies and the team's management processes enforce the boundaries.
+
 ## The pattern: pull, then push
 
 Most people meet ESO through `ExternalSecret`: read from an external provider,
