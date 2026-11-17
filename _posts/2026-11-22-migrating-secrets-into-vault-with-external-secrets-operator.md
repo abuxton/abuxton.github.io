@@ -30,12 +30,30 @@ each path. A reusable pull-and-push process can follow that design: the same
 approach can be adapted for each source and destination, rather than asking
 one team to run a single migration for everyone.
 
+[HashiCorp's Vault organizational concepts guide](https://developer.hashicorp.com/validated-designs/vault/administration-guide/vault-organizational-concepts)
+provides a useful starting point for that design. For Vault Enterprise and
+HCP Vault Dedicated, it recommends tenant namespaces under an `admin`
+namespace, with sub-namespaces that can represent applications or
+environments. The namespace structure depends on the organisation; it is
+not a substitute for policies that grant each team and workload only the
+access it needs. In HCP Vault Dedicated, the root namespace is reserved for
+the HCP control plane; for self-managed Enterprise, the guide recommends
+reserving it for Vault operators.
+
 That makes it possible to separate core platform secrets from product and
 development team secrets. The platform team can migrate the shared services it
 owns and provide guidance on destination paths, access, review and cutover.
 Product teams can then migrate and validate their own secrets within those
 boundaries, taking responsibility for their applications without needing
 access to another team's secrets.
+
+The guide also recommends managing Vault configuration through reviewed,
+version-controlled infrastructure as code, with reusable modules for
+application teams. For a migration, agree the destination namespace, mount,
+policies and owners before moving values; test the configuration in a separate
+Vault environment, then review the cutover and rollback plan with the
+application team. Keep secret values out of Git, and protect any automation
+state or logs that might contain them.
 
 The demo shows the mechanics with one source and one Vault mount; it does not
 implement that multi-team design. In practice, each migration needs its own
