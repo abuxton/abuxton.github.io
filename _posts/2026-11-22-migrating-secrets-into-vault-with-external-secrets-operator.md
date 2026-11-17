@@ -203,6 +203,10 @@ task migrate:validate  # read the migrated secret back out of Vault
 task down              # remove everything
 ```
 
+The validation commands print the migrated values to the terminal. They are
+safe to inspect here because the demo uses fake secrets; do not use this
+validation approach for production credentials or in shared CI logs.
+
 `task up` creates the cluster, installs ESO and an in-cluster Vault, publishes
 the fake legacy secrets, registers both stores, runs the pull and push, and
 reads the result back from Vault. The
@@ -210,25 +214,30 @@ reads the result back from Vault. The
 in the repo explains each stage. There is also a bonus example using ESO
 generators and templating, independent of the migration.
 
-## Why this is a safer way to migrate
+## Following a secret through the migration
 
-The security argument is the reason I like this approach.
+I like this approach because it avoids a deliberate export to a file on an
+operator's laptop or in a CI workspace. That removes one place where an
+unattended copy could be left behind. It does not mean the secret never reaches
+disk, or that deleting a container erases every copy.
 
-**Nothing lands on disc.** Values move from the source provider into the
-Kubernetes API and out to Vault. There is no export file, no `jq` pipeline and
-no workspace to clean up.
+Consider the demo's `legacy-app-credentials`. It starts as a Kubernetes
+`Secret` in `legacy-platform`. ESO's source ServiceAccount needs permission to
+read it; people and workloads without that need should not have access. The
+`ExternalSecret` then creates `migrated-app-credentials` in `eso-demo`. That
+intermediate `Secret` can persist in etcd and backups, so restrict access with
+RBAC and protect both etcd and its backups, including encryption at rest.
 
-**Everything is ephemeral.** The demo cluster and its containers are disposable.
-`task down` removes them, so there is no long-lived migration host holding
-credentials.
+Finally, the `PushSecret` writes the values to Vault at
+`migration/apps/eso-demo/app-credentials`. The demo uses Kubernetes auth for
+ESO rather than a static Vault token. In a real migration, restrict the Vault
+role and policy to the destination paths the team needs, and protect the
+ServiceAccount credentials used to authenticate.
 
-**No static tokens.** ESO authenticates to Vault with Kubernetes auth through
-its own ServiceAccount, and the Vault policy only needs access to the target
-path.
-
-That is not the same as no risk. Secrets are only secret while people handle
-them carefully, and a migration is exactly when they get handled the most. Here
-is what to watch.
+The Kind cluster and containers in the demo are disposable. `task down`
+removes the demo resources and cluster, but it does not guarantee secure
+deletion of copies in backups, logs or underlying storage. Production
+environments need their own retention and cleanup plan.
 
 <figure>
   <a href="https://xkcd.com/2543/">
@@ -242,16 +251,25 @@ is what to watch.
   </figcaption>
 </figure>
 
-**The intermediate `Secret` exists.** Between pull and push, the migrated value
-is a Kubernetes `Secret` in etcd. Restrict who can read it with RBAC, encrypt
-etcd at rest, and delete it when you are finished. The `creationPolicy` and
-deletion settings on the `ExternalSecret` decide what happens to it.
+### Validate without exposing values
 
-**Logs need thought.** ESO's controller logs, events and metrics are part of
-the migration's footprint. Check what they record at your log level: paths,
-keys and errors are one thing, values another. Decide who can read controller
-logs and `kubectl describe` output, and where those logs are shipped and for
-how long they are kept. Do this before the migration, not after.
+The demo reads the Vault secret back to the terminal. For real credentials,
+check the ESO resources' status and use a controlled application or test to
+confirm the destination works without printing values. A ready status alone
+does not prove the right values reached the right consumer. Keep any comparison
+inside a trusted environment and report a pass or failure, not the secrets.
+
+Check what ESO controller logs, events and metrics record at the configured log
+level. Review Vault audit logging too: protect access to logs, decide where
+they are shipped and how long they are kept, and check the effect of your
+audit configuration before migrating. Avoid putting values into terminal
+output, CI logs or diagnostic captures.
+
+Once consumers have moved and validation is complete, stop reconciliation
+deliberately and remove temporary access and intermediate secrets. Check the
+`ExternalSecret` and `PushSecret` ownership and deletion settings first, so
+cleanup does not remove a Vault secret you intend to keep. Account for retained
+backups and rotate or retire the old credentials according to your policy.
 
 ## What the ESO threat model says
 
@@ -283,8 +301,9 @@ The controls it lists map neatly to the migration:
 
 The threat model is honest that ESO does not ship pre-packaged network
 policies or policy-engine rules. Those controls are yours to write. What the
-approach gives you is a shorter exposure window and a declarative, reviewable
-migration, compared with a script nobody can audit.
+approach gives you is a declarative, reviewable migration that can avoid
+unnecessary exports. How long copies and credentials remain accessible depends
+on the environment and the cleanup process.
 
 ## Caveats
 
