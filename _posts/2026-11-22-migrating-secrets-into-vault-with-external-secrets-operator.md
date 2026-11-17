@@ -207,12 +207,29 @@ The validation commands print the migrated values to the terminal. They are
 safe to inspect here because the demo uses fake secrets; do not use this
 validation approach for production credentials or in shared CI logs.
 
+This walkthrough uses a local Kubernetes cluster and assumes you are already
+comfortable operating Kubernetes and Kind. It is not a recommended starting
+point for handling real secrets if you are unfamiliar with local clusters:
+Kubernetes `Secret` data is stored in the cluster state, which for a local
+cluster is backed by data on your machine. Tearing down the cluster does not
+guarantee secure deletion of every copy. Use fake values for the demo, and
+only handle real credentials locally if you understand where cluster data,
+backups and logs may persist.
+
 `task up` creates the cluster, installs ESO and an in-cluster Vault, publishes
 the fake legacy secrets, registers both stores, runs the pull and push, and
 reads the result back from Vault. The
 [migration walkthrough](https://github.com/abuxton/vault-migrate/blob/main/docs/migration-walkthrough.md)
 in the repo explains each stage. There is also a bonus example using ESO
 generators and templating, independent of the migration.
+
+The migration mechanism uses Kubernetes, but the applications consuming the
+secrets do not have to run there. Once the values are in Vault, an application
+can use its usual Vault integration whether it is deployed on Kubernetes or
+elsewhere. This is worth considering when applications already integrate with
+an external secret service, even if Kubernetes is not part of their deployment
+platform; the demo is a way to explore the migration approach, not a reason to
+introduce Kubernetes just to use it.
 
 ## Following a secret through the migration
 
