@@ -6,8 +6,6 @@ categories: [terraform, vault]
 tags: [hashicorp-vault, terraform, brownfield, infrastructure-as-code, agent-skills, platform-engineering]
 ---
 
-> 🤖 **AI co-author:** [GitHub Copilot](https://github.com/features/copilot)
-
 Most Vault installations do not begin life as Terraform projects. They grow
 the usual way: a bit of clicking in the UI, a script here, an emergency fix
 there, and somebody who knows how it all works moving on to a different
@@ -280,3 +278,5 @@ started with.
 - [Stage 1 handoff](https://github.com/abuxton/vault-agentic-codifier/blob/main/HANDOFF.md)
 - [Stage 2 tasks](https://github.com/abuxton/vault-agentic-codifier/blob/main/openspec/changes/vault-codifier-stage-2/tasks.md)
 - [Remote Review tasks](https://github.com/abuxton/vault-agentic-codifier/blob/main/openspec/changes/vault-codifier-remote-review/tasks.md)
+
+> 🤖 **AI co-author:** [GitHub Copilot](https://github.com/features/copilot)
